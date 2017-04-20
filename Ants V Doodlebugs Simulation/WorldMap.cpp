@@ -8,6 +8,9 @@
 
 #include "WorldMap.hpp"
 #include <vector>
+#include <iostream>
+using std::cout;
+using std::endl;
 using std::vector;
 
 WorldMap::WorldMap() {
@@ -79,8 +82,20 @@ void WorldMap::putBugOnMap(Organism * bugPtr) {
     }
 }
 
-void WorldMap::moveBugOnMap(Organism * bugPtr) {
+void WorldMap::moveBugsOnMap() {
+    cout << "World map move bugs called.\n";
     
+    for (int row = 0; row < vWorldMapMatrix.size(); row++) {
+        for (int col = 0; col < vWorldMapMatrix[row].size(); col++) {
+            cout << "matrix loc: " << row << "," << col << " - ";
+            if (blockIsOccupied(row, col)) {
+                cout << " bug present here" << "\n";
+                // call bug's move method
+                vWorldMapMatrix[row][col]->occupantPtr->move();
+            }
+            cout << "\n";
+        }
+    }
 }
 
 void WorldMap::printWorldMapSize() {

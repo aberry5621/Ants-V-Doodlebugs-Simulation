@@ -5,11 +5,10 @@
 //  Created by ax on 4/19/17.
 //  Copyright © 2017 COMP235. All rights reserved.
 //
-
+#include "WorldMap.hpp"
 #include "Organism.hpp"
 #include "Ant.hpp"
 #include "Doodlebug.hpp"
-
 #include <iostream>
 #include <string>
 #include <ctime>
@@ -45,15 +44,11 @@ int main() {
     
     SimWorld.putBugOnMap(&bug);
     
-    
-    
     Doodlebug dbug("Dave");
     
     dbug.getName();
     
     SimWorld.putBugOnMap(&dbug);
-    
-    
     
     Ant ant("Andy");
     
@@ -62,10 +57,13 @@ int main() {
     SimWorld.putBugOnMap(&ant);
     
     
-    cout << "Moving bugs around...\n";
-    bug.move();
-    ant.move();
-    dbug.move();
+//    cout << "Moving bugs around...\n";
+//    bug.move();
+//    ant.move();
+//    dbug.move();
+    
+    
+    SimWorld.moveBugsOnMap();
     
     // control loop
     // simulate time

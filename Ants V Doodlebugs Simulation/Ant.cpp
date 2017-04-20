@@ -12,6 +12,7 @@ Ant::Ant()  {/* blank constructor */}
 
 // preload constrcutor
 Ant::Ant(char p_symbol) { setSymbol(p_symbol); }
+
 // initializes with preload constructor to set symbol
 Ant::Ant(string p_name) : Ant('A') {
     this->setName(p_name);
