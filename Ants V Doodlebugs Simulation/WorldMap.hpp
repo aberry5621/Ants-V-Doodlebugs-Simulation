@@ -2,7 +2,7 @@
 //  WorldMap.hpp
 //  Ants V Doodlebugs Simulation
 //
-//  Created by ax on 4/19/17.
+//  Created by ax on 4/20/17.
 //  Copyright © 2017 COMP235. All rights reserved.
 //
 
@@ -27,9 +27,6 @@ public:
     // construct world map object
     WorldMap(int p_size_x, int p_size_y);
     
-    // try to put a bug on the map
-    void putBugOnMap(Organism * bugPtr);
-    
     // check if cell is occupied
     bool blockIsOccupied(int p_x, int p_y);
     
@@ -41,6 +38,11 @@ public:
     
     // clear cell
     void clearCell(int p_x, int p_y);
+    
+    // try to put a bug on the map
+    void putBugOnMap(Organism * bugPtr);
+    
+    void moveBugOnMap(Organism * bugPtr);
     
     // print out size of WorldMap
     void printWorldMapSize();

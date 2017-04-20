@@ -6,7 +6,6 @@
 //  Copyright © 2017 COMP235. All rights reserved.
 //
 
-#include "WorldMap.hpp"
 #include "Organism.hpp"
 #include "Ant.hpp"
 #include "Doodlebug.hpp"
@@ -18,6 +17,7 @@ using std::string;
 using std::cout;
 using std::cin;
 using std::endl;
+
 
 // control functions
 void stepConfirmMessage();
@@ -45,17 +45,27 @@ int main() {
     
     SimWorld.putBugOnMap(&bug);
     
+    
+    
     Doodlebug dbug("Dave");
     
     dbug.getName();
     
     SimWorld.putBugOnMap(&dbug);
     
+    
+    
     Ant ant("Andy");
     
     ant.getName();
     
     SimWorld.putBugOnMap(&ant);
+    
+    
+    cout << "Moving bugs around...\n";
+    bug.move();
+    ant.move();
+    dbug.move();
     
     // control loop
     // simulate time
@@ -100,3 +110,7 @@ void quitSimulation() {
     cout << "Quitting, goodbye!" << endl;
     exit(1);
 }
+
+
+
+

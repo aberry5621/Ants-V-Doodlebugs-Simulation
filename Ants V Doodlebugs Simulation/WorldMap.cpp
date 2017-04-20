@@ -2,14 +2,13 @@
 //  WorldMap.cpp
 //  Ants V Doodlebugs Simulation
 //
-//  Created by ax on 4/19/17.
+//  Created by ax on 4/20/17.
 //  Copyright © 2017 COMP235. All rights reserved.
 //
 
 #include "WorldMap.hpp"
-#include <iostream>
-using std::cout;
-using std::endl;
+#include <vector>
+using std::vector;
 
 WorldMap::WorldMap() {
     // empty default constructor
@@ -31,23 +30,6 @@ WorldMap::WorldMap(int p_size_x, int p_size_y) {
             vWorldMapMatrix[row][col] = (new WorldBlock);
             vWorldMapMatrix[row][col]->pos_x = row;
             vWorldMapMatrix[row][col]->pos_y = col;
-        }
-    }
-}
-
-void WorldMap::putBugOnMap(Organism * bugPtr) {
-    // find an unoccupied random block
-    bool blockUnoccupied = false;
-    while (!blockUnoccupied) {
-        int gen_x = WorldMap::get_rand(0, m_size_x);
-        int gen_y = WorldMap::get_rand(0, m_size_y);
-        cout << "Checking if " << gen_x << "," << gen_y << " is occupied.\n";
-        if (WorldMap::blockIsOccupied(gen_x, gen_y)) {
-            cout << "Block is occupied! :(\n";
-        } else {
-            cout << "Found a free block! :)\n";
-            setCellPointer(gen_x, gen_y, bugPtr, true);
-            blockUnoccupied = true;
         }
     }
 }
@@ -77,6 +59,27 @@ void WorldMap::clearCell(int p_x, int p_y) {
     // point cell x, y to it
     vWorldMapMatrix[p_x][p_y]->pos_x = p_x;
     vWorldMapMatrix[p_x][p_y]->pos_y = p_y;
+    
+}
+
+void WorldMap::putBugOnMap(Organism * bugPtr) {
+    // find an unoccupied random block
+    bool blockUnoccupied = false;
+    while (!blockUnoccupied) {
+        int gen_x = WorldMap::get_rand(0, m_size_x);
+        int gen_y = WorldMap::get_rand(0, m_size_y);
+        cout << "Checking if " << gen_x << "," << gen_y << " is occupied.\n";
+        if (WorldMap::blockIsOccupied(gen_x, gen_y)) {
+            cout << "Block is occupied! :(\n";
+        } else {
+            cout << "Found a free block! :)\n";
+            setCellPointer(gen_x, gen_y, bugPtr, true);
+            blockUnoccupied = true;
+        }
+    }
+}
+
+void WorldMap::moveBugOnMap(Organism * bugPtr) {
     
 }
 
@@ -124,12 +127,7 @@ void WorldMap::printWorldMap() {
 
 
 int WorldMap::get_rand(int lb, int ub) {
-
+    
     return lb + rand() % (ub - lb + 1);
 }
-
-
-
-
-
 
