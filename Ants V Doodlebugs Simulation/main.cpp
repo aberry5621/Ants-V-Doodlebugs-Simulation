@@ -6,6 +6,7 @@
 //  Copyright © 2017 COMP235. All rights reserved.
 //
 
+#include "WorldMap.hpp"
 #include "Organism.hpp"
 #include "Ant.hpp"
 #include "Doodlebug.hpp"
