@@ -42,7 +42,7 @@ void Organism::setSymbol(char p_symbol) {
     m_symbol = p_symbol;
 }
 
-void Organism::move() {
+int Organism::getMoveDirection() {
     cout << "An Organism is moving!\n";
     // get current position x, y coords on grid
     int c_x = m_x_coord ; // this bugs x pos
@@ -57,23 +57,27 @@ void Organism::move() {
         case 1:
             // left
             cout << "Going LEFT! \n";
+            dir = 1;
             break;
         case 2:
             // up
             cout << "Going UP! \n";
+            dir = 2;
             break;
         case 3:
             // right
             cout << "Going RIGHT! \n";
+            dir = 3;
             break;
         case 4:
             // down
             cout << "Going DOWN! \n";
+            dir = 4;
             break;
         default:
             break;
     }
-    
+    return dir;
 }
 
 

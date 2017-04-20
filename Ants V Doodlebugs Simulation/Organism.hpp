@@ -30,7 +30,7 @@ public:
     void setSymbol(char p_symbol);
     
     // mutators
-    void move();
+    int getMoveDirection();
 
 private:
     int m_x_coord = 0;
