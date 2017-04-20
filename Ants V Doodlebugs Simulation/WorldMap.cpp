@@ -8,7 +8,8 @@
 
 #include "WorldMap.hpp"
 #include <vector>
-using std::vector;
+#include <iostream>
+using namespace std;
 
 WorldMap::WorldMap() {
     // empty default constructor
