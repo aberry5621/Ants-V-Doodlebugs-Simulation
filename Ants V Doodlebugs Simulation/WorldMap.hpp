@@ -42,7 +42,7 @@ public:
     // try to put a bug on the map
     void putBugOnMap(Organism * bugPtr);
     
-    void moveBugOnMap(Organism * bugPtr);
+    void moveBugsOnMap();
     
     // print out size of WorldMap
     void printWorldMapSize();

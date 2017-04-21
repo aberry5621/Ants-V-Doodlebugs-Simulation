@@ -5,11 +5,10 @@
 //  Created by ax on 4/19/17.
 //  Copyright © 2017 COMP235. All rights reserved.
 //
-
+#include "WorldMap.hpp"
 #include "Organism.hpp"
 #include "Ant.hpp"
 #include "Doodlebug.hpp"
-
 #include <iostream>
 #include <string>
 #include <ctime>
@@ -67,25 +66,34 @@ int main() {
 
     
     
+<<<<<<< HEAD
     
     //WorldMap SimWorld(WORLD_SIZE, WORLD_SIZE);
     
     // populate world
     Organism bug("Sam");
+=======
+    Doodlebug dbug("Dave");
+>>>>>>> ec303c8ffa5bfc629af10d1bb0ea6a64c8baa616
     
     bug.getName();
     
     // SimWorld.putBugOnMap(&bug);
     
+<<<<<<< HEAD
     vWorldMapMatrix[1][1]->occupantPtr = &bug;
     vWorldMapMatrix[1][1]->bOccupied = true;
     
     
     printWorldMap(vWorldMapMatrix);
+=======
+    Ant ant("Andy");
+>>>>>>> ec303c8ffa5bfc629af10d1bb0ea6a64c8baa616
     
     
     
     
+<<<<<<< HEAD
 //
 //    
 //    
@@ -104,10 +112,18 @@ int main() {
 //    SimWorld.putBugOnMap(&ant);
 //    
 //    
+=======
+>>>>>>> ec303c8ffa5bfc629af10d1bb0ea6a64c8baa616
 //    cout << "Moving bugs around...\n";
 //    bug.move();
 //    ant.move();
 //    dbug.move();
+<<<<<<< HEAD
+=======
+    
+    
+    SimWorld.moveBugsOnMap();
+>>>>>>> ec303c8ffa5bfc629af10d1bb0ea6a64c8baa616
     
     // control loop
     // simulate time

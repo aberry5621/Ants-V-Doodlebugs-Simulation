@@ -9,7 +9,13 @@
 #include "WorldMap.hpp"
 #include <vector>
 #include <iostream>
+<<<<<<< HEAD
 using namespace std;
+=======
+using std::cout;
+using std::endl;
+using std::vector;
+>>>>>>> ec303c8ffa5bfc629af10d1bb0ea6a64c8baa616
 
 WorldMap::WorldMap() {
     // empty default constructor
@@ -80,8 +86,21 @@ void WorldMap::putBugOnMap(Organism * bugPtr) {
     }
 }
 
-void WorldMap::moveBugOnMap(Organism * bugPtr) {
+void WorldMap::moveBugsOnMap() {
+    cout << "World map move bugs called.\n";
     
+    for (int row = 0; row < vWorldMapMatrix.size(); row++) {
+        for (int col = 0; col < vWorldMapMatrix[row].size(); col++) {
+            cout << "matrix loc: " << row << "," << col << " - ";
+            if (blockIsOccupied(row, col)) {
+                cout << " bug present here" << "\n";
+                // call bug's move method
+                int move_direction = vWorldMapMatrix[row][col]->occupantPtr->getMoveDirection();
+                
+            }
+            cout << "\n";
+        }
+    }
 }
 
 void WorldMap::printWorldMapSize() {
