@@ -65,18 +65,28 @@ int main() {
         }
     }
 
-    printWorldMap(vWorldMapMatrix);
+    
     
     
     //WorldMap SimWorld(WORLD_SIZE, WORLD_SIZE);
     
     // populate world
-//    Organism bug("Sam");
-//    
-//    bug.getName();
-//    
-//    SimWorld.putBugOnMap(&bug);
-//    
+    Organism bug("Sam");
+    
+    bug.getName();
+    
+    // SimWorld.putBugOnMap(&bug);
+    
+    vWorldMapMatrix[1][1]->occupantPtr = &bug;
+    vWorldMapMatrix[1][1]->bOccupied = true;
+    
+    
+    printWorldMap(vWorldMapMatrix);
+    
+    
+    
+    
+//
 //    
 //    
 //    Doodlebug dbug("Dave");
@@ -173,7 +183,7 @@ void printWorldMap(vector<vector<WorldBlock *>> vWorldMapMatrix) {
             if (vWorldMapMatrix[row][col]->bOccupied) {
                 cout << "[" << vWorldMapMatrix[row][col]->occupantPtr->getSymbol() << "]";
             } else {
-                cout << "[ ]";
+                cout << "[X]";
             }
         }
         cout << "\n";
