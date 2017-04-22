@@ -8,8 +8,9 @@
 
 #ifndef Organism_hpp
 #define Organism_hpp
-
+#include <vector>
 #include <string>
+using std::vector;
 using std::string;
 
 struct Coordinates {

@@ -21,6 +21,7 @@ using namespace std;
 void stepConfirmMessage();
 void readCoords();
 void quitSimulation();
+
 // world block structs
 struct WorldBlock {
     int pos_x = 0;
@@ -31,6 +32,10 @@ struct WorldBlock {
 
 bool checkMapCoordsInBounds(vector<vector<WorldBlock *>> map,int world_size_x, int world_size_y, Coordinates loc);
 bool checkMapCoordsOccupied(vector<vector<WorldBlock *>> map,int world_size_x, int world_size_y, Coordinates loc);
+
+// world reference, coords old, coords new, bug poinger
+void moveBug(vector<vector<WorldBlock *>> map, Coordinates mov_coords, Coordinates old_coords, Organism * bugPtr);
+
 void printWorldMap(vector<vector<WorldBlock *>>);
 
 int main() {
@@ -84,15 +89,13 @@ int main() {
     
     vWorldMapMatrix[0][1]->occupantPtr = &dbug;
     vWorldMapMatrix[0][1]->bOccupied = true;
-
+    dbug.setCoords(0, 1);
+    
     Ant ant("Andy");
-
     vWorldMapMatrix[3][3]->occupantPtr = &ant;
     vWorldMapMatrix[3][3]->bOccupied = true;
-    
+    ant.setCoords(3, 3);
     printWorldMap(vWorldMapMatrix);
-    
-    
     
     
     // control loop
@@ -108,15 +111,11 @@ int main() {
         // move bugs
         
         cout << "Moving bugs around...\n";
-        
-        // select / choose / manipulate / invoke bug to be moved
-        
-        // bug chooses a move direction
-        
-        // bug checks the move direction
+        // BUG SAM
+        cout << "Move bug SAM...\n";
+        // bug chooses the move direction
         Coordinates mov_coords = bug.getMoveCoords();
         // check map location
-        
         // is it on the map?
         bool inbounds = checkMapCoordsInBounds(vWorldMapMatrix, WORLD_SIZE_X, WORLD_SIZE_Y, mov_coords);
         
@@ -127,21 +126,61 @@ int main() {
         
         if (inbounds && !occupied) {
             cout << "In bounds and not occupied. Ready to move bug to loc.\n";
+            Coordinates old_coords = bug.getCoords(); // get old coords first
+            moveBug(vWorldMapMatrix, mov_coords, old_coords, &bug);
+            
+        } else {
+            cout << "NOT In bounds OR occupied. NOT Ready to move bug to loc.\n";
+        }
+
+        printWorldMap(vWorldMapMatrix); // show me the move!
+        
+        // DBUG DAVE
+        cout << "Move dbug DAVE...\n";
+        // bug chooses the move direction
+        mov_coords = dbug.getMoveCoords();
+        // check map location
+        // is it on the map?
+        inbounds = checkMapCoordsInBounds(vWorldMapMatrix, WORLD_SIZE_X, WORLD_SIZE_Y, mov_coords);
+        
+        // is it an open spot or is it occupied?
+        occupied = checkMapCoordsOccupied(vWorldMapMatrix, WORLD_SIZE_X, WORLD_SIZE_Y, mov_coords);
+        
+        // if it is free / open
+        
+        if (inbounds && !occupied) {
+            cout << "In bounds and not occupied. Ready to move bug to loc.\n";
+            Coordinates old_coords = dbug.getCoords(); // get old coords first
+            moveBug(vWorldMapMatrix, mov_coords, old_coords, &dbug);
+            
         } else {
             cout << "NOT In bounds OR occupied. NOT Ready to move bug to loc.\n";
         }
         
-        // move there
-        Coordinates old_coords = bug.getCoords(); // get old coords first
-        // point new cooords to bug
-        vWorldMapMatrix[mov_coords.x][mov_coords.y]->occupantPtr = &bug;
-        vWorldMapMatrix[mov_coords.x][mov_coords.y]->bOccupied = true;
-        bug.setCoords(mov_coords.x, mov_coords.y);
-        // set old coordinates to fresh world block
-        vWorldMapMatrix[old_coords.x][old_coords.y] = (new WorldBlock);
-        vWorldMapMatrix[old_coords.x][old_coords.y]->pos_x = old_coords.x;
-        vWorldMapMatrix[old_coords.x][old_coords.y]->pos_y = old_coords.y;
-        vWorldMapMatrix[old_coords.x][old_coords.y]->bOccupied = false;
+        printWorldMap(vWorldMapMatrix); // show me the move!
+
+        // ANT ANDY
+        cout << "Move ant ANDY...\n";
+        // bug chooses the move direction
+        mov_coords = ant.getMoveCoords();
+        // check map location
+        // is it on the map?
+        inbounds = checkMapCoordsInBounds(vWorldMapMatrix, WORLD_SIZE_X, WORLD_SIZE_Y, mov_coords);
+        
+        // is it an open spot or is it occupied?
+        occupied = checkMapCoordsOccupied(vWorldMapMatrix, WORLD_SIZE_X, WORLD_SIZE_Y, mov_coords);
+        
+        // if it is free / open
+        
+        if (inbounds && !occupied) {
+            cout << "In bounds and not occupied. Ready to move bug to loc.\n";
+            Coordinates old_coords = ant.getCoords(); // get old coords first
+            moveBug(vWorldMapMatrix, mov_coords, old_coords, &ant);
+            
+        } else {
+            cout << "NOT In bounds OR occupied. NOT Ready to move bug to loc.\n";
+        }
+
         
         printWorldMap(vWorldMapMatrix); // show me the move!
         
@@ -210,6 +249,18 @@ bool checkMapCoordsOccupied(vector<vector<WorldBlock *>> map, int world_size_x, 
     }
     return occupied;
 }
+
+void moveBug(vector<vector<WorldBlock *>> map, Coordinates mov_coords, Coordinates old_coords, Organism * bugPtr) {
+    // move a bug
+    // point new cooords to bug
+    map[mov_coords.x][mov_coords.y]->occupantPtr = bugPtr;
+    map[mov_coords.x][mov_coords.y]->bOccupied = true;
+    bugPtr->setCoords(mov_coords.x, mov_coords.y);
+    // set old coordinates to fresh world block
+    map[old_coords.x][old_coords.y]->occupantPtr = nullptr;
+    map[old_coords.x][old_coords.y]->bOccupied = false;
+}
+
 
 void printWorldMap(vector<vector<WorldBlock *>> vWorldMapMatrix) {
     // print the grid with row and column counts
