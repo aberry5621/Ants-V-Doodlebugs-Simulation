@@ -39,7 +39,7 @@ Coordinates Organism::getMoveCoords() {
     cout << "An Organism is moving!\n";
     // get current position x, y coords on grid
     int c_x = m_gridloc.x; // this bugs x pos
-    int c_y = m_gridloc.x; // this bugs y pos
+    int c_y = m_gridloc.y; // this bugs y pos
     cout << "Current loc: " << c_x << "," << c_y << "\n";
     Coordinates return_coords;
     cout << "Enter move direction [1] LEFT, [2] UP, [3] RIGHT, [4] DOWN: ";
