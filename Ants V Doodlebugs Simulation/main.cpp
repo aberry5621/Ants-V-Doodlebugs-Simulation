@@ -21,7 +21,7 @@ using namespace std;
 void stepConfirmMessage();
 void readCoords();
 void quitSimulation();
-
+// world block structs
 struct WorldBlock {
     int pos_x = 0;
     int pos_y = 0;
@@ -29,6 +29,7 @@ struct WorldBlock {
     Organism * occupantPtr;
 };
 
+void checkMapCoords(vector<vector<WorldBlock *>> map, Coordinates loc);
 void printWorldMap(vector<vector<WorldBlock *>>);
 
 int main() {
@@ -98,9 +99,14 @@ int main() {
     // select / choose / manipulate / invoke bug to be moved
     
     // bug chooses a move direction
-    bug.getMoveDirection();
+    Coordinates mov_coords = bug.getMoveCoords();
     
     // bug checks the move direction
+    
+    bug.checkMoveDirection();
+    
+    // check map location
+    checkMapCoords(vWorldMapMatrix, bug.getMoveCoords());
     
         // is it on the map?
         // is it an open spot or is it occupied?
@@ -113,10 +119,7 @@ int main() {
                     // stay put
         
     
-    
-    
-    
-    
+
     
     
 //    Doodlebug dbug("Dave");
@@ -177,6 +180,16 @@ void readCoords() {
 void quitSimulation() {
     cout << "Quitting, goodbye!" << endl;
     exit(1);
+}
+
+void checkMapCoords(vector<vector<WorldBlock *>> map, Coordinates loc) {
+    bool occupied = map[loc.x][loc.y]->bOccupied;
+    if (occupied) {
+        cout << "Map check shows loc is occupied.";
+    } else {
+        cout << "Map check shows loc is UNoccupied.";
+    }
+
 }
 
 void printWorldMap(vector<vector<WorldBlock *>> vWorldMapMatrix) {

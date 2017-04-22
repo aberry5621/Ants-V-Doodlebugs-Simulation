@@ -89,7 +89,7 @@ void WorldMap::moveBugsOnMap() {
             if (blockIsOccupied(row, col)) {
                 cout << " bug present here" << "\n";
                 // call bug's move method
-                int move_direction = vWorldMapMatrix[row][col]->occupantPtr->getMoveDirection();
+                // int move_direction = vWorldMapMatrix[row][col]->occupantPtr->getMoveDirection();
                 
             }
             cout << "\n";

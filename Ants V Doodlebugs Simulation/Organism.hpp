@@ -29,6 +29,8 @@ public:
     string getName();
     char getSymbol();
     Coordinates getCoords();
+    Coordinates getMoveCoords();
+    void checkMoveDirection();
     
     // setters
     void setName(string p_name);
@@ -36,7 +38,7 @@ public:
     void setCoords(int p_x_coord, int p_y_coord);
     
     // mutators
-    int getMoveDirection();
+    
 
 private:
     Coordinates m_gridloc;
