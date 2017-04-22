@@ -9,13 +9,7 @@
 #include "WorldMap.hpp"
 #include <vector>
 #include <iostream>
-<<<<<<< HEAD
 using namespace std;
-=======
-using std::cout;
-using std::endl;
-using std::vector;
->>>>>>> ec303c8ffa5bfc629af10d1bb0ea6a64c8baa616
 
 WorldMap::WorldMap() {
     // empty default constructor

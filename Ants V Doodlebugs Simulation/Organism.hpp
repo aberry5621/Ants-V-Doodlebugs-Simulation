@@ -12,6 +12,11 @@
 #include <string>
 using std::string;
 
+struct Coordinates {
+    int x;
+    int y;
+};
+
 class Organism {
     
 public:
@@ -21,20 +26,20 @@ public:
     Organism(string p_name);
     
     // getters
-    void getName();
+    string getName();
     char getSymbol();
+    Coordinates getCoords();
     
     // setters
-    void setCoords(int p_x_coord, int p_y_coord);
     void setName(string p_name);
     void setSymbol(char p_symbol);
+    void setCoords(int p_x_coord, int p_y_coord);
     
     // mutators
     int getMoveDirection();
 
 private:
-    int m_x_coord = 0;
-    int m_y_coord = 0;
+    Coordinates m_gridloc;
     string m_name = "Bob";
     int m_age = 0;
     char m_symbol = 'O';

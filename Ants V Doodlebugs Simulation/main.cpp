@@ -5,7 +5,7 @@
 //  Created by ax on 4/19/17.
 //  Copyright © 2017 COMP235. All rights reserved.
 //
-#include "WorldMap.hpp"
+
 #include "Organism.hpp"
 #include "Ant.hpp"
 #include "Doodlebug.hpp"
@@ -64,66 +64,75 @@ int main() {
         }
     }
 
-    
-    
-<<<<<<< HEAD
-    
     //WorldMap SimWorld(WORLD_SIZE, WORLD_SIZE);
     
     // populate world
     Organism bug("Sam");
-=======
-    Doodlebug dbug("Dave");
->>>>>>> ec303c8ffa5bfc629af10d1bb0ea6a64c8baa616
-    
     bug.getName();
-    
-    // SimWorld.putBugOnMap(&bug);
-    
-<<<<<<< HEAD
+    // place Sam
     vWorldMapMatrix[1][1]->occupantPtr = &bug;
     vWorldMapMatrix[1][1]->bOccupied = true;
+    bug.setCoords(1, 1);
+    Coordinates thisBugsSpot = bug.getCoords();
+    cout << "Getting coords for: " << bug.getName() << "\n";
+    cout << thisBugsSpot.x << "," << thisBugsSpot.y << "\n";
     
+    Doodlebug dbug("Dave");
+    dbug.getName();
+    
+    vWorldMapMatrix[2][2]->occupantPtr = &dbug;
+    vWorldMapMatrix[2][2]->bOccupied = true;
+
+    Ant ant("Andy");
+
+    vWorldMapMatrix[3][3]->occupantPtr = &ant;
+    vWorldMapMatrix[3][3]->bOccupied = true;
     
     printWorldMap(vWorldMapMatrix);
-=======
-    Ant ant("Andy");
->>>>>>> ec303c8ffa5bfc629af10d1bb0ea6a64c8baa616
+    
+    
+    // move bugs
+    
+    cout << "Moving bugs around...\n";
+    
+    // select / choose / manipulate / invoke bug to be moved
+    
+    // bug chooses a move direction
+    bug.getMoveDirection();
+    
+    // bug checks the move direction
+    
+        // is it on the map?
+        // is it an open spot or is it occupied?
+            // if it is free / open
+                // move there
+            // if it is occupied
+                // if  bug can eat what's there
+                    // eat it
+                // if bug can't eat it
+                    // stay put
+        
     
     
     
     
-<<<<<<< HEAD
-//
-//    
-//    
+    
+    
+    
 //    Doodlebug dbug("Dave");
-//    
 //    dbug.getName();
-//    
 //    SimWorld.putBugOnMap(&dbug);
-//    
-//    
-//    
 //    Ant ant("Andy");
-//    
 //    ant.getName();
-//    
 //    SimWorld.putBugOnMap(&ant);
-//    
-//    
-=======
->>>>>>> ec303c8ffa5bfc629af10d1bb0ea6a64c8baa616
-//    cout << "Moving bugs around...\n";
+//
 //    bug.move();
 //    ant.move();
 //    dbug.move();
-<<<<<<< HEAD
-=======
+
     
-    
-    SimWorld.moveBugsOnMap();
->>>>>>> ec303c8ffa5bfc629af10d1bb0ea6a64c8baa616
+    // SimWorld.moveBugsOnMap();
+
     
     // control loop
     // simulate time
@@ -199,7 +208,7 @@ void printWorldMap(vector<vector<WorldBlock *>> vWorldMapMatrix) {
             if (vWorldMapMatrix[row][col]->bOccupied) {
                 cout << "[" << vWorldMapMatrix[row][col]->occupantPtr->getSymbol() << "]";
             } else {
-                cout << "[X]";
+                cout << "[ ]";
             }
         }
         cout << "\n";
