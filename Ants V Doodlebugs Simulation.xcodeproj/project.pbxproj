@@ -11,7 +11,6 @@
 		E2CF08601EA869CF00F33CD5 /* Organism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2CF085E1EA869CF00F33CD5 /* Organism.cpp */; };
 		E2CF08631EA917A600F33CD5 /* Ant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2CF08611EA917A600F33CD5 /* Ant.cpp */; };
 		E2CF08661EA917B400F33CD5 /* Doodlebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2CF08641EA917B400F33CD5 /* Doodlebug.cpp */; };
-		E2CF08691EA93ABE00F33CD5 /* WorldMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2CF08671EA93ABE00F33CD5 /* WorldMap.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,8 +34,6 @@
 		E2CF08621EA917A600F33CD5 /* Ant.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ant.hpp; sourceTree = "<group>"; };
 		E2CF08641EA917B400F33CD5 /* Doodlebug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Doodlebug.cpp; sourceTree = "<group>"; };
 		E2CF08651EA917B400F33CD5 /* Doodlebug.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Doodlebug.hpp; sourceTree = "<group>"; };
-		E2CF08671EA93ABE00F33CD5 /* WorldMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorldMap.cpp; sourceTree = "<group>"; };
-		E2CF08681EA93ABE00F33CD5 /* WorldMap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WorldMap.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +73,6 @@
 				E2CF08621EA917A600F33CD5 /* Ant.hpp */,
 				E2CF08641EA917B400F33CD5 /* Doodlebug.cpp */,
 				E2CF08651EA917B400F33CD5 /* Doodlebug.hpp */,
-				E2CF08671EA93ABE00F33CD5 /* WorldMap.cpp */,
-				E2CF08681EA93ABE00F33CD5 /* WorldMap.hpp */,
 			);
 			path = "Ants V Doodlebugs Simulation";
 			sourceTree = "<group>";
@@ -139,7 +134,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2CF08691EA93ABE00F33CD5 /* WorldMap.cpp in Sources */,
 				E2CF08601EA869CF00F33CD5 /* Organism.cpp in Sources */,
 				E2CF08551EA83B8000F33CD5 /* main.cpp in Sources */,
 				E2CF08661EA917B400F33CD5 /* Doodlebug.cpp in Sources */,
