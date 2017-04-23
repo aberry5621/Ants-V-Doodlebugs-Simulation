@@ -14,7 +14,8 @@ Ant::Ant()  {/* blank constructor */}
 Ant::Ant(char p_symbol) { setSymbol(p_symbol); }
 
 // initializes with preload constructor to set symbol
-Ant::Ant(string p_name) : Ant('A') {
+Ant::Ant(string p_name, vector<vector<WorldBlock<Organism> *>> p_map) : Ant('A') {
     this->setName(p_name);
+    this->setMapPointer(p_map);
 }
 

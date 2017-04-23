@@ -13,6 +13,7 @@ Doodlebug::Doodlebug() {/* blank constructor */}
 // preload constructor
 Doodlebug::Doodlebug(char p_symbol) { setSymbol(p_symbol);}
 // initializes with preload constructor to set symbol
-Doodlebug::Doodlebug(string p_name) : Doodlebug('D') {
+Doodlebug::Doodlebug(string p_name, vector<vector<WorldBlock<Organism> *>> p_map) : Doodlebug('D') {
     this->setName(p_name);
+    this->setMapPointer(p_map);
 }

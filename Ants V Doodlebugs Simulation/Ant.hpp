@@ -16,9 +16,12 @@ class Ant : public Organism {
 public:
         Ant();
         Ant(char p_symbol);
-        Ant(string p_name);
+        Ant(string p_name, vector<vector<WorldBlock<Organism> *>> p_map);
+    
+        // just move
+    
 private:
-
+    int m_bug_type_id = 2;
 };
 
 #endif /* Ant_hpp */
