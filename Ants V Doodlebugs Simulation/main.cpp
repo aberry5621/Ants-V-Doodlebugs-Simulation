@@ -75,26 +75,26 @@ int main() {
     //WorldMap SimWorld(WORLD_SIZE, WORLD_SIZE);
     
     // populate world
-    Organism bug("Bob", vWorldMapMatrix);
-    bug.getName();
-    // place Bob
-    vWorldMapMatrix[0][0]->occupantPtr = &bug;
-    vWorldMapMatrix[0][0]->bOccupied = true;
-    bug.setCoords(0, 0);
-    Coordinates thisBugsSpot = bug.getCoords();
-    cout << "Getting coords for: " << bug.getName() << "\n";
-    cout << thisBugsSpot.x << "," << thisBugsSpot.y << "\n";
+//    Organism bug("Bob", vWorldMapMatrix);
+//    bug.getName();
+//    // place Bob
+//    vWorldMapMatrix[0][0]->occupantPtr = &bug;
+//    vWorldMapMatrix[0][0]->bOccupied = true;
+//    bug.setCoords(0, 0);
+//    Coordinates thisBugsSpot = bug.getCoords();
+//    cout << "Getting coords for: " << bug.getName() << "\n";
+//    cout << thisBugsSpot.x << "," << thisBugsSpot.y << "\n";
     
     Doodlebug dbug("Dave", vWorldMapMatrix);
     dbug.getName();
     
-    vWorldMapMatrix[0][1]->occupantPtr = &dbug;
-    vWorldMapMatrix[0][1]->bOccupied = true;
+    vWorldMapMatrix[2][2]->occupantPtr = &dbug;
+    vWorldMapMatrix[2][2]->bOccupied = true;
     dbug.setCoords(0, 1);
     
     Ant ant("Andy", vWorldMapMatrix);
-    vWorldMapMatrix[3][3]->occupantPtr = &ant;
-    vWorldMapMatrix[3][3]->bOccupied = true;
+    vWorldMapMatrix[2][3]->occupantPtr = &ant;
+    vWorldMapMatrix[2][3]->bOccupied = true;
     ant.setCoords(3, 3);
     printWorldMap(vWorldMapMatrix);
     
@@ -116,8 +116,8 @@ int main() {
         cout << "Move bug Bob...\n";
         
         // move
-        bug.move();
-        printWorldMap(vWorldMapMatrix); // show me the move!
+        // bug.move(); // cant move generic organizms any longer
+        // printWorldMap(vWorldMapMatrix); // show me the move!
         
         dbug.move();
         printWorldMap(vWorldMapMatrix); // show me the move!
@@ -239,20 +239,6 @@ void readCoords() {
 void quitSimulation() {
     cout << "Quitting, goodbye!" << endl;
     exit(1);
-}
-
-
-
-
-void moveBug(vector<vector<WorldBlock<Organism> *>> map, Coordinates mov_coords, Coordinates old_coords, Organism * bugPtr) {
-    // move a bug
-    // point new cooords to bug
-    map[mov_coords.x][mov_coords.y]->occupantPtr = bugPtr;
-    map[mov_coords.x][mov_coords.y]->bOccupied = true;
-    bugPtr->setCoords(mov_coords.x, mov_coords.y);
-    // set old coordinates to fresh world block
-    map[old_coords.x][old_coords.y]->occupantPtr = nullptr;
-    map[old_coords.x][old_coords.y]->bOccupied = false;
 }
 
 void printWorldMap(vector<vector<WorldBlock<Organism> *>> vWorldMapMatrix) {

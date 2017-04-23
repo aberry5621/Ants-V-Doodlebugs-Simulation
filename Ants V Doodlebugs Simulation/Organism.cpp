@@ -66,6 +66,10 @@ int Organism::checkMoveCoords() {
     return move_status_code;
 }
 
+int Organism::getOtherBugTypeId() {
+    return m_map[m_mov_coords.x][m_mov_coords.y]->occupantPtr->getSymbol();
+}
+
 // SETTERS
 void Organism::setName(string p_name) {
      m_name = p_name;
@@ -125,29 +129,21 @@ void Organism::setMoveCoords() {
 }
 
 void Organism::move() {
-    cout << "An Organism is moving!\n";
+    cout << "A organizm is moving!\n";
     // set the move to coordingates
     this->setMoveCoords();
     // check the move to coordinates
     int move_status = checkMoveCoords();
-    Coordinates tmp_coords = this->getCoords();
+    
     switch (move_status) {
         case 1:
             // space is valid and empty, move to it
             cout << "Space is empty, move to it!\n";
-
-            // set move to coords to point at this bug
-            m_map[m_mov_coords.x][m_mov_coords.y]->occupantPtr = this;
-            m_map[m_mov_coords.x][m_mov_coords.y]->bOccupied = true;
-            this->setCoords(m_mov_coords.x, m_mov_coords.y);
-            // set old coords to blank
-            m_map[tmp_coords.x][tmp_coords.y]->occupantPtr = nullptr;
-            m_map[tmp_coords.x][tmp_coords.y]->bOccupied = false;
-            
+            this->transplantOnMap();
             break;
         case 2:
             // space is valid and occupied, try to eat it
-            cout << "Spot is occupied, try to eat it!\n";
+            cout << "Spot is occupied, organizms don't know how to eat!\n";
             break;
         case 3:
             // TODO: possibly try to breed with it or something
@@ -157,7 +153,16 @@ void Organism::move() {
     }
     
 }
-
+void Organism::transplantOnMap() {
+    Coordinates tmp_coords = this->getCoords();
+    // set move to coords to point at this bug
+    m_map[m_mov_coords.x][m_mov_coords.y]->occupantPtr = this;
+    m_map[m_mov_coords.x][m_mov_coords.y]->bOccupied = true;
+    this->setCoords(m_mov_coords.x, m_mov_coords.y);
+    // set old coords to blank
+    m_map[tmp_coords.x][tmp_coords.y]->occupantPtr = nullptr;
+    m_map[tmp_coords.x][tmp_coords.y]->bOccupied = false;
+}
 
 
 

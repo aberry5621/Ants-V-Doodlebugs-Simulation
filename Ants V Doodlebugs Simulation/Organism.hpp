@@ -35,6 +35,7 @@ public:
     char getSymbol();
     Coordinates getCoords();
     int checkMoveCoords();
+    int getOtherBugTypeId();
     
     // setters
     void setName(string p_name);
@@ -43,8 +44,8 @@ public:
     void setMapPointer(vector<vector<WorldBlock<Organism> *>> p_map);
     void setCoords(int p_x_coord, int p_y_coord);
     void setMoveCoords();
-    
-    void move();
+    void transplantOnMap();
+    virtual void move();
     
     // mutators
     
