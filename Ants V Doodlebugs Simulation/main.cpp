@@ -6,6 +6,7 @@
 //  Copyright © 2017 COMP235. All rights reserved.
 //
 
+#include "WorldBlockTemplate.hpp"
 #include "Organism.hpp"
 #include "Ant.hpp"
 #include "Doodlebug.hpp"
@@ -23,20 +24,20 @@ void readCoords();
 void quitSimulation();
 
 // world block structs
-struct WorldBlock {
-    int pos_x = 0;
-    int pos_y = 0;
-    bool bOccupied = false;
-    Organism * occupantPtr;
-};
+//struct WorldBlock {
+//    int pos_x = 0;
+//    int pos_y = 0;
+//    bool bOccupied = false;
+//    Organism * occupantPtr;
+//};
 
-bool checkMapCoordsInBounds(vector<vector<WorldBlock *>> map,int world_size_x, int world_size_y, Coordinates loc);
-bool checkMapCoordsOccupied(vector<vector<WorldBlock *>> map,int world_size_x, int world_size_y, Coordinates loc);
+bool checkMapCoordsInBounds(vector<vector<WorldBlock<Organism> *>> map,int world_size_x, int world_size_y, Coordinates loc);
+bool checkMapCoordsOccupied(vector<vector<WorldBlock<Organism> *>> map,int world_size_x, int world_size_y, Coordinates loc);
 
 // world reference, coords old, coords new, bug poinger
-void moveBug(vector<vector<WorldBlock *>> map, Coordinates mov_coords, Coordinates old_coords, Organism * bugPtr);
+void moveBug(vector<vector<WorldBlock<Organism> *>> map, Coordinates mov_coords, Coordinates old_coords, Organism * bugPtr);
 
-void printWorldMap(vector<vector<WorldBlock *>>);
+void printWorldMap(vector<vector<WorldBlock<Organism> *>>);
 
 int main() {
     // insert code here...
@@ -52,20 +53,20 @@ int main() {
     
     // create world
     
-    vector<vector<WorldBlock *>> vWorldMapMatrix;
-    WorldBlock * tmpWorldBlockPtr;
+    vector<vector<WorldBlock<Organism> *>> vWorldMapMatrix;
+    WorldBlock<Organism> * tmpWorldBlockPtr;
     
     // store x y WorldMap size in WorldMap size member variables
     
     vWorldMapMatrix.resize(WORLD_SIZE_X);
     
     for (int i = 0; i < WORLD_SIZE_X; i++) {
-        vWorldMapMatrix[i] = vector<WorldBlock *>(WORLD_SIZE_Y);
+        vWorldMapMatrix[i] = vector<WorldBlock<Organism> *>(WORLD_SIZE_Y);
     }
     // fill each row / col with a new world block
     for (int row = 0; row < vWorldMapMatrix.size(); row++) {
         for (int col = 0; col < vWorldMapMatrix[row].size(); col++) {
-            vWorldMapMatrix[row][col] = (new WorldBlock);
+            vWorldMapMatrix[row][col] = (new WorldBlock<Organism>);
             vWorldMapMatrix[row][col]->pos_x = row;
             vWorldMapMatrix[row][col]->pos_y = col;
         }
@@ -132,6 +133,9 @@ int main() {
         } else {
             cout << "NOT In bounds OR occupied. NOT Ready to move bug to loc.\n";
         }
+        
+        // check map test
+        bug.checkMoveDirection(vWorldMapMatrix); // already a pass by reference sittyashin
 
         printWorldMap(vWorldMapMatrix); // show me the move!
         
@@ -223,7 +227,7 @@ void quitSimulation() {
     exit(1);
 }
 
-bool checkMapCoordsInBounds(vector<vector<WorldBlock *>> map, int world_size_x, int world_size_y, Coordinates loc) {
+bool checkMapCoordsInBounds(vector<vector<WorldBlock<Organism> *>> map, int world_size_x, int world_size_y, Coordinates loc) {
     // inbounds?
     bool inbounds = false;
     if ((loc.x >= 0 && loc.x < world_size_x) && (loc.y >= 0 && loc.y < world_size_y)) {
@@ -232,7 +236,7 @@ bool checkMapCoordsInBounds(vector<vector<WorldBlock *>> map, int world_size_x, 
     return inbounds;
 }
 
-bool checkMapCoordsOccupied(vector<vector<WorldBlock *>> map, int world_size_x, int world_size_y, Coordinates loc) {
+bool checkMapCoordsOccupied(vector<vector<WorldBlock<Organism> *>> map, int world_size_x, int world_size_y, Coordinates loc) {
     bool occupied = false;
     bool inbounds = checkMapCoordsInBounds(map, world_size_x, world_size_y, loc);
     if (inbounds) {
@@ -250,7 +254,7 @@ bool checkMapCoordsOccupied(vector<vector<WorldBlock *>> map, int world_size_x, 
     return occupied;
 }
 
-void moveBug(vector<vector<WorldBlock *>> map, Coordinates mov_coords, Coordinates old_coords, Organism * bugPtr) {
+void moveBug(vector<vector<WorldBlock<Organism> *>> map, Coordinates mov_coords, Coordinates old_coords, Organism * bugPtr) {
     // move a bug
     // point new cooords to bug
     map[mov_coords.x][mov_coords.y]->occupantPtr = bugPtr;
@@ -262,7 +266,7 @@ void moveBug(vector<vector<WorldBlock *>> map, Coordinates mov_coords, Coordinat
 }
 
 
-void printWorldMap(vector<vector<WorldBlock *>> vWorldMapMatrix) {
+void printWorldMap(vector<vector<WorldBlock<Organism> *>> vWorldMapMatrix) {
     // print the grid with row and column counts
     cout << "Printing the WorldMap * * * * * * * * *" << endl;
     for (int row = 0; row < vWorldMapMatrix.size(); row++) {

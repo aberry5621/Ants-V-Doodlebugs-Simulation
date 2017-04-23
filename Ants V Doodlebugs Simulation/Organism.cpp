@@ -17,9 +17,10 @@ Organism::Organism() {
     cout << "Constructing an organiszm.\n";
 }
 
-Organism::Organism(string p_name) {
+Organism::Organism(string p_name, vector<vector<WorldBlock<Organism> *>> p_map) {
     cout << "Constructing an organiszm with params.\n";
     m_name = p_name;
+    m_map = p_map;
 }
 
 // GETTERS
@@ -79,6 +80,11 @@ Coordinates Organism::getMoveCoords() {
 
 void Organism::checkMoveDirection() {
   // does nothing
+    cout << "Checking Move direction on reference to map\n";
+    cout << "Occupied status of coords 0, 0: \n";
+    bool occupiedStatus = m_map[0][0]->bOccupied;
+    cout << occupiedStatus;
+    cout << "\nAnd there you have it folks! YAY\n";
 }
 
 // SETTERS

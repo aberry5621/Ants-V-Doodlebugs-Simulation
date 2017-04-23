@@ -8,6 +8,9 @@
 
 #ifndef Organism_hpp
 #define Organism_hpp
+
+#include "WorldBlockTemplate.hpp"
+
 #include <vector>
 #include <string>
 using std::vector;
@@ -24,7 +27,7 @@ public:
     // default constructor
     Organism();
     // primary constructor
-    Organism(string p_name);
+    Organism(string p_name, vector<vector<WorldBlock<Organism> *>> p_map);
     
     // getters
     string getName();
@@ -40,12 +43,12 @@ public:
     
     // mutators
     
-
 private:
-    Coordinates m_gridloc;
     string m_name = "Bob";
     int m_age = 0;
     char m_symbol = 'O';
+    Coordinates m_gridloc;
+    vector<vector<WorldBlock<Organism> *>> m_map;
 };
 
 #endif /* Organism_hpp */

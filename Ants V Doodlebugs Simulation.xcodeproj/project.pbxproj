@@ -34,6 +34,7 @@
 		E2CF08621EA917A600F33CD5 /* Ant.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ant.hpp; sourceTree = "<group>"; };
 		E2CF08641EA917B400F33CD5 /* Doodlebug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Doodlebug.cpp; sourceTree = "<group>"; };
 		E2CF08651EA917B400F33CD5 /* Doodlebug.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Doodlebug.hpp; sourceTree = "<group>"; };
+		E2CF086E1EAD056200F33CD5 /* WorldBlockTemplate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WorldBlockTemplate.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +74,7 @@
 				E2CF08621EA917A600F33CD5 /* Ant.hpp */,
 				E2CF08641EA917B400F33CD5 /* Doodlebug.cpp */,
 				E2CF08651EA917B400F33CD5 /* Doodlebug.hpp */,
+				E2CF086E1EAD056200F33CD5 /* WorldBlockTemplate.hpp */,
 			);
 			path = "Ants V Doodlebugs Simulation";
 			sourceTree = "<group>";
