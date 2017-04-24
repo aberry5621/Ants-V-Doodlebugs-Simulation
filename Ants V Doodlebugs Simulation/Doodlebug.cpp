@@ -14,9 +14,12 @@ using std::endl;
 Doodlebug::Doodlebug() {/* blank constructor */}
 
 // preload constructor
-Doodlebug::Doodlebug(char p_symbol) { setSymbol(p_symbol);}
+Doodlebug::Doodlebug(char p_symbol, int p_bug_type_id) {
+    setSymbol(p_symbol);
+    setBugTypeId(p_bug_type_id);
+}
 // initializes with preload constructor to set symbol
-Doodlebug::Doodlebug(string p_name, vector<vector<WorldBlock<Organism> *>> p_map) : Doodlebug('D') {
+Doodlebug::Doodlebug(string p_name, vector<vector<WorldBlock<Organism> *>> p_map) : Doodlebug('D',1) {
     this->setName(p_name);
     this->setMapPointer(p_map);
 }
@@ -24,13 +27,33 @@ Doodlebug::Doodlebug(string p_name, vector<vector<WorldBlock<Organism> *>> p_map
 void Doodlebug::tryToEatBug() {
     // detect bug type in move to spot
     int bug_type_id = getOtherBugTypeId();
-    if (bug_type_id == 1) {
+    if (bug_type_id == 0) {
+        cout << "Other bug type id is 0: " << bug_type_id << "\n";
+    } else if (bug_type_id == 1) {
+        cout << "Other bug type id is 1: " << bug_type_id << "\n";
         // another doodlebug, do nothing or maybe breed
     } else if (bug_type_id == 2) {
-        // eat the ant
+        cout << "Other bug type id is 2: " << bug_type_id << "\n";
+        // (del)eat the ant
+        Coordinates trgt_coords = getMoveCoords();
+        vector<vector<WorldBlock<Organism> *>> tmp_map = getMapRef();
+        
+        Organism * tmpOrgPtr;
+        tmpOrgPtr = tmp_map[trgt_coords.x][trgt_coords.y]->occupantPtr;
+
+        
+        // move to the newly empty spot
         this->transplantOnMap();
+        m_ants_eaten++;
+    } else {
+        // bug type ID error
+        cout << "Some kind of bug type id errror!\n";
+        exit(1);
     }
 }
+
+Doodlebug::~Doodlebug() {}
+
 
 void Doodlebug::move() {
     cout << "A Doodlebug is moving!\n";

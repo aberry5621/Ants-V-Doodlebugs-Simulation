@@ -14,13 +14,17 @@ using std::endl;
 Ant::Ant()  {/* blank constructor */}
 
 // preload constrcutor
-Ant::Ant(char p_symbol) { setSymbol(p_symbol); }
-
+Ant::Ant(char p_symbol, int p_bug_type_id) {
+    setSymbol(p_symbol);
+    setBugTypeId(p_bug_type_id);
+}
 // initializes with preload constructor to set symbol
-Ant::Ant(string p_name, vector<vector<WorldBlock<Organism> *>> p_map) : Ant('A') {
+Ant::Ant(string p_name, vector<vector<WorldBlock<Organism> *>> p_map) : Ant('A',2) {
     this->setName(p_name);
     this->setMapPointer(p_map);
 }
+
+Ant::~Ant() {}
 
 void Ant::move() {
     cout << "An Ant is moving!\n";

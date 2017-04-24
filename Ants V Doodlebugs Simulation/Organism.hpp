@@ -28,18 +28,24 @@ public:
     Organism();
     // primary constructor
     Organism(string p_name, vector<vector<WorldBlock<Organism> *>> p_map);
-    
+
+    ~Organism();
+
     // getters
     int getBugTypeId();
     string getName();
     char getSymbol();
     Coordinates getCoords();
+    Coordinates getMoveCoords();
     int checkMoveCoords();
     int getOtherBugTypeId();
+    vector<vector<WorldBlock<Organism> *>> getMapRef();
+    
     
     // setters
     void setName(string p_name);
     // setAge
+    void setBugTypeId(int p_bug_type_id);
     void setSymbol(char p_symbol);
     void setMapPointer(vector<vector<WorldBlock<Organism> *>> p_map);
     void setCoords(int p_x_coord, int p_y_coord);

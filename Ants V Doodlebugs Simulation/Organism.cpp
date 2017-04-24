@@ -23,6 +23,8 @@ Organism::Organism(string p_name, vector<vector<WorldBlock<Organism> *>> p_map) 
     m_map = p_map;
 }
 
+Organism::~Organism() {}
+
 // GETTERS
 
 int Organism::getBugTypeId() {
@@ -39,6 +41,10 @@ char Organism::getSymbol() {
 
 Coordinates Organism::getCoords() {
     return this->m_cur_coords;
+}
+
+Coordinates Organism::getMoveCoords() {
+    return this->m_mov_coords;
 }
 
 int Organism::checkMoveCoords() {
@@ -67,12 +73,20 @@ int Organism::checkMoveCoords() {
 }
 
 int Organism::getOtherBugTypeId() {
-    return m_map[m_mov_coords.x][m_mov_coords.y]->occupantPtr->getSymbol();
+    return m_map[m_mov_coords.x][m_mov_coords.y]->occupantPtr->getBugTypeId();
+}
+
+vector<vector<WorldBlock<Organism> *>> Organism::getMapRef() {
+    return m_map;
 }
 
 // SETTERS
 void Organism::setName(string p_name) {
      m_name = p_name;
+}
+
+void Organism::setBugTypeId(int p_bug_type_id) {
+    m_bug_type_id = p_bug_type_id;
 }
 
 void Organism::setSymbol(char p_symbol) {
@@ -154,13 +168,23 @@ void Organism::move() {
     
 }
 void Organism::transplantOnMap() {
+    
+    // store current world block in temp pointer?
+    
+    // point temp ptr at current world block occupant
+    Organism * tmpOrgPtr;
+    tmpOrgPtr = m_map[m_cur_coords.x][m_cur_coords.y]->occupantPtr;
+    
+    
     Coordinates tmp_coords = this->getCoords();
     // set move to coords to point at this bug
-    m_map[m_mov_coords.x][m_mov_coords.y]->occupantPtr = this;
+    m_map[m_mov_coords.x][m_mov_coords.y]->occupantPtr = tmpOrgPtr;
     m_map[m_mov_coords.x][m_mov_coords.y]->bOccupied = true;
     this->setCoords(m_mov_coords.x, m_mov_coords.y);
     // set old coords to blank
-    m_map[tmp_coords.x][tmp_coords.y]->occupantPtr = nullptr;
+    m_map[tmp_coords.x][tmp_coords.y] = (new WorldBlock<Organism>);
+    m_map[tmp_coords.x][tmp_coords.y]->pos_x = tmp_coords.x;
+    m_map[tmp_coords.x][tmp_coords.y]->pos_y = tmp_coords.y;
     m_map[tmp_coords.x][tmp_coords.y]->bOccupied = false;
 }
 

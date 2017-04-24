@@ -90,12 +90,12 @@ int main() {
     
     vWorldMapMatrix[2][2]->occupantPtr = &dbug;
     vWorldMapMatrix[2][2]->bOccupied = true;
-    dbug.setCoords(0, 1);
+    dbug.setCoords(2, 2);
     
     Ant ant("Andy", vWorldMapMatrix);
     vWorldMapMatrix[2][3]->occupantPtr = &ant;
     vWorldMapMatrix[2][3]->bOccupied = true;
-    ant.setCoords(3, 3);
+    ant.setCoords(2, 3);
     printWorldMap(vWorldMapMatrix);
     
     
@@ -113,15 +113,17 @@ int main() {
         
         cout << "Moving bugs around...\n";
         // BUG Bob
-        cout << "Move bug Bob...\n";
+        //cout << "Move bug Bob...\n";
         
         // move
         // bug.move(); // cant move generic organizms any longer
         // printWorldMap(vWorldMapMatrix); // show me the move!
         
+        cout << "Bug name is: " << dbug.getName() << endl;
         dbug.move();
         printWorldMap(vWorldMapMatrix); // show me the move!
         
+        cout << "Bug name is: " << ant.getName() << endl;
         ant.move();
         printWorldMap(vWorldMapMatrix); // show me the move!
         
