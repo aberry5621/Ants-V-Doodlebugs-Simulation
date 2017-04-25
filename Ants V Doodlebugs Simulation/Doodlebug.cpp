@@ -34,17 +34,30 @@ void Doodlebug::tryToEatBug() {
         // another doodlebug, do nothing or maybe breed
     } else if (bug_type_id == 2) {
         cout << "Other bug type id is 2: " << bug_type_id << "\n";
+        
         // (del)eat the ant
         Coordinates trgt_coords = getMoveCoords();
+        
+        cout << "The move target coordinates are: "
+        << trgt_coords.x
+        << ","
+        << trgt_coords.y
+        << endl;
+        
         vector<vector<WorldBlock<Organism> *>> tmp_map = getMapRef();
         
         Organism * tmpOrgPtr;
         tmpOrgPtr = tmp_map[trgt_coords.x][trgt_coords.y]->occupantPtr;
-
+        
+        tmp_map[trgt_coords.x][trgt_coords.y]->occupantPtr = nullptr;
+        tmp_map[trgt_coords.x][trgt_coords.y]->bOccupied = false;
+        
+        m_ants_eaten++;
         
         // move to the newly empty spot
         this->transplantOnMap();
-        m_ants_eaten++;
+        
+        
     } else {
         // bug type ID error
         cout << "Some kind of bug type id errror!\n";

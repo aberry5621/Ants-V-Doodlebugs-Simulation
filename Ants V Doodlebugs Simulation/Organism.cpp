@@ -169,24 +169,44 @@ void Organism::move() {
 }
 void Organism::transplantOnMap() {
     
+    cout << "Transplant on map called!\n";
+    
     // store current world block in temp pointer?
     
     // point temp ptr at current world block occupant
+    // this is the bug that wants to move
     Organism * tmpOrgPtr;
     tmpOrgPtr = m_map[m_cur_coords.x][m_cur_coords.y]->occupantPtr;
     
     
-    Coordinates tmp_coords = this->getCoords();
+    Coordinates tmp_cur_coords = this->getCoords();
+    cout << "This bugs current coordinates: "
+    << tmp_cur_coords.x
+    << ","
+    << tmp_cur_coords.y
+    << endl;
     
-    // set move to coords to point at this bug
+    Coordinates tmp_mov_coords = this->getMoveCoords();
+    cout << "This bugs move target coordinates, by getMoveCoords(): "
+    << tmp_mov_coords.x
+    << ","
+    << tmp_mov_coords.y
+    << endl;
+    
+    cout << "This bugs move target coordinates, organism private m_ vars: "
+    << m_mov_coords.x
+    << ","
+    << m_mov_coords.y
+    << endl;
+    
+    // point move to coords pointer to point at the bug that
+    // want to move
     m_map[m_mov_coords.x][m_mov_coords.y]->occupantPtr = tmpOrgPtr;
     m_map[m_mov_coords.x][m_mov_coords.y]->bOccupied = true;
     m_map[m_mov_coords.x][m_mov_coords.y]->occupantPtr->setCoords(m_mov_coords.x, m_mov_coords.y);
     // set old coords to blank
-    m_map[tmp_coords.x][tmp_coords.y] = (new WorldBlock<Organism>);
-    m_map[tmp_coords.x][tmp_coords.y]->pos_x = tmp_coords.x;
-    m_map[tmp_coords.x][tmp_coords.y]->pos_y = tmp_coords.y;
-    m_map[tmp_coords.x][tmp_coords.y]->bOccupied = false;
+    m_map[tmp_cur_coords.x][tmp_cur_coords.y]->occupantPtr = nullptr;
+    m_map[tmp_cur_coords.x][tmp_cur_coords.y]->bOccupied = false;
 }
 
 
