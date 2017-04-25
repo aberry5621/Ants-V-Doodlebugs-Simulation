@@ -19,8 +19,13 @@ public:
         Ant(string p_name, vector<vector<WorldBlock<Organism> *>> p_map);
         ~Ant();
     
+
+    
         // just move
         virtual void move();
+    
+        // die
+        void die();
     
 private:
     int m_bug_type_id;

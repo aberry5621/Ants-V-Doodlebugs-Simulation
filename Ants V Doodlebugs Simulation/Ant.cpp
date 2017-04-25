@@ -24,7 +24,14 @@ Ant::Ant(string p_name, vector<vector<WorldBlock<Organism> *>> p_map) : Ant('A',
     this->setMapPointer(p_map);
 }
 
-Ant::~Ant() {}
+Ant::~Ant() {
+    cout << "Ant deleted!\n";
+}
+
+void Ant::die() {
+    cout << "Ant die called!\n";
+    delete this;
+}
 
 void Ant::move() {
     cout << "An Ant is moving!\n";

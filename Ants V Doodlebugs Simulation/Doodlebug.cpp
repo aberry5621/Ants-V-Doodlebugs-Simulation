@@ -24,6 +24,10 @@ Doodlebug::Doodlebug(string p_name, vector<vector<WorldBlock<Organism> *>> p_map
     this->setMapPointer(p_map);
 }
 
+Doodlebug::~Doodlebug() {
+    cout << "Doodlebug deleted!\n";
+}
+
 void Doodlebug::tryToEatBug() {
     // detect bug type in move to spot
     int bug_type_id = getOtherBugTypeId();
@@ -46,8 +50,14 @@ void Doodlebug::tryToEatBug() {
         
         vector<vector<WorldBlock<Organism> *>> tmp_map = getMapRef();
         
+        // Point at victim ant
         Organism * tmpOrgPtr;
         tmpOrgPtr = tmp_map[trgt_coords.x][trgt_coords.y]->occupantPtr;
+        
+        // eat it / kill it
+        tmpOrgPtr->die();
+        tmpOrgPtr = nullptr;
+        
         
         tmp_map[trgt_coords.x][trgt_coords.y]->occupantPtr = nullptr;
         tmp_map[trgt_coords.x][trgt_coords.y]->bOccupied = false;
@@ -64,9 +74,6 @@ void Doodlebug::tryToEatBug() {
         exit(1);
     }
 }
-
-Doodlebug::~Doodlebug() {}
-
 
 void Doodlebug::move() {
     cout << "A Doodlebug is moving!\n";

@@ -23,7 +23,9 @@ Organism::Organism(string p_name, vector<vector<WorldBlock<Organism> *>> p_map) 
     m_map = p_map;
 }
 
-Organism::~Organism() {}
+Organism::~Organism() {
+        cout << "Organism deleted!\n";
+}
 
 // GETTERS
 
@@ -142,31 +144,6 @@ void Organism::setMoveCoords() {
     }
 }
 
-void Organism::move() {
-    cout << "A organizm is moving!\n";
-    // set the move to coordingates
-    this->setMoveCoords();
-    // check the move to coordinates
-    int move_status = checkMoveCoords();
-    
-    switch (move_status) {
-        case 1:
-            // space is valid and empty, move to it
-            cout << "Space is empty, move to it!\n";
-            this->transplantOnMap();
-            break;
-        case 2:
-            // space is valid and occupied, try to eat it
-            cout << "Spot is occupied, organizms don't know how to eat!\n";
-            break;
-        case 3:
-            // TODO: possibly try to breed with it or something
-            break;
-        default:
-            break;
-    }
-    
-}
 void Organism::transplantOnMap() {
     
     cout << "Transplant on map called!\n";
@@ -177,7 +154,6 @@ void Organism::transplantOnMap() {
     // this is the bug that wants to move
     Organism * tmpOrgPtr;
     tmpOrgPtr = m_map[m_cur_coords.x][m_cur_coords.y]->occupantPtr;
-    
     
     Coordinates tmp_cur_coords = this->getCoords();
     cout << "This bugs current coordinates: "
@@ -207,6 +183,37 @@ void Organism::transplantOnMap() {
     // set old coords to blank
     m_map[tmp_cur_coords.x][tmp_cur_coords.y]->occupantPtr = nullptr;
     m_map[tmp_cur_coords.x][tmp_cur_coords.y]->bOccupied = false;
+}
+
+void Organism::move() {
+    cout << "A organizm is moving!\n";
+    // set the move to coordingates
+    this->setMoveCoords();
+    // check the move to coordinates
+    int move_status = checkMoveCoords();
+    
+    switch (move_status) {
+        case 1:
+            // space is valid and empty, move to it
+            cout << "Space is empty, move to it!\n";
+            this->transplantOnMap();
+            break;
+        case 2:
+            // space is valid and occupied, try to eat it
+            cout << "Spot is occupied, organizms don't know how to eat!\n";
+            break;
+        case 3:
+            // TODO: possibly try to breed with it or something
+            break;
+        default:
+            break;
+    }
+    
+}
+
+
+void Organism::die() {
+    cout << "Organism die called!\n";
 }
 
 

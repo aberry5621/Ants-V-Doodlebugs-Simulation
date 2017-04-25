@@ -23,13 +23,6 @@ void stepConfirmMessage();
 void readCoords();
 void quitSimulation();
 
-// world block structs
-//struct WorldBlock {
-//    int pos_x = 0;
-//    int pos_y = 0;
-//    bool bOccupied = false;
-//    Organism * occupantPtr;
-//};
 
 bool checkMapCoordsInBounds(vector<vector<WorldBlock<Organism> *>> map,int world_size_x, int world_size_y, Coordinates loc);
 bool checkMapCoordsOccupied(vector<vector<WorldBlock<Organism> *>> map,int world_size_x, int world_size_y, Coordinates loc);
@@ -96,9 +89,21 @@ int main() {
     vWorldMapMatrix[2][3]->occupantPtr = &ant;
     vWorldMapMatrix[2][3]->bOccupied = true;
     ant.setCoords(2, 3);
+    
+    // create ant with ant pointer so can eat and delete maybe
+    Ant * antPtr;
+    antPtr = new Ant();
+
+    antPtr->setName("Adam");
+    antPtr->setSymbol('A');
+    antPtr->setBugTypeId(2);
+    antPtr->setMapPointer(vWorldMapMatrix);
+    vWorldMapMatrix[3][3]->occupantPtr = antPtr;
+    vWorldMapMatrix[3][3]->bOccupied = true;
+    antPtr->setCoords(3, 3);
+
     printWorldMap(vWorldMapMatrix);
-    
-    
+
     // control loop
     // simulate time
     // step forward when user presses enter key
@@ -126,6 +131,11 @@ int main() {
         cout << "Bug name is: " << ant.getName() << endl;
         ant.move();
         printWorldMap(vWorldMapMatrix); // show me the move!
+        
+        
+        cout << "Bugs alive by name:" << endl;
+        cout << "Bug alive and name is: " << dbug.getName() << endl;
+        cout << "Bug alive and name is: " << ant.getName() << endl;
         
         
         

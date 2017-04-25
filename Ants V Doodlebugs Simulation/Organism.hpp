@@ -54,6 +54,7 @@ public:
     virtual void move();
     
     // mutators
+    void die();
     
 private:
     int m_bug_type_id = 0;
