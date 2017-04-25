@@ -15,6 +15,8 @@ using std::cin;
 // CONSTRUCTORS
 Organism::Organism() {
     cout << "Constructing an organiszm.\n";
+    // start bugs with a count of 1
+    this->incrementTimeSinceMoved();
 }
 
 Organism::Organism(string p_name, vector<vector<WorldBlock<Organism> *>> p_map) {
@@ -72,6 +74,10 @@ int Organism::checkMoveCoords() {
         }
     }
     return move_status_code;
+}
+
+int Organism::getTimeSinceMoved() {
+    return this->m_time_since_moved;
 }
 
 int Organism::getOtherBugTypeId() {
@@ -211,6 +217,13 @@ void Organism::move() {
     
 }
 
+void Organism::incrementTimeSinceMoved() {
+    this->m_time_since_moved++;
+}
+
+void Organism::resetTimeSinceMoved() {
+    this->m_time_since_moved = 0;
+}
 
 void Organism::die() {
     cout << "Organism die called!\n";

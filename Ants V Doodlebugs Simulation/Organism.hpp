@@ -38,9 +38,9 @@ public:
     Coordinates getCoords();
     Coordinates getMoveCoords();
     int checkMoveCoords();
+    int getTimeSinceMoved();
     int getOtherBugTypeId();
     vector<vector<WorldBlock<Organism> *>> getMapRef();
-    
     
     // setters
     void setName(string p_name);
@@ -52,6 +52,8 @@ public:
     void setMoveCoords();
     void transplantOnMap();
     virtual void move();
+    void incrementTimeSinceMoved();
+    void resetTimeSinceMoved();
     
     // mutators
     void die();
@@ -61,6 +63,7 @@ private:
     string m_name = "Anonymous Bug";
     int m_age = 0;
     char m_symbol = 'O';
+    int m_time_since_moved;
     Coordinates m_cur_coords;
     Coordinates m_mov_coords;
     vector<vector<WorldBlock<Organism> *>> m_map;

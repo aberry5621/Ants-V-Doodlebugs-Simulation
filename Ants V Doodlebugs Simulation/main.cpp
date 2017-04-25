@@ -28,7 +28,7 @@ bool checkMapCoordsInBounds(vector<vector<WorldBlock<Organism> *>> map,int world
 bool checkMapCoordsOccupied(vector<vector<WorldBlock<Organism> *>> map,int world_size_x, int world_size_y, Coordinates loc);
 
 // world reference, coords old, coords new, bug poinger
-void moveBug(vector<vector<WorldBlock<Organism> *>> map, Coordinates mov_coords, Coordinates old_coords, Organism * bugPtr);
+void moveBugs(vector<vector<WorldBlock<Organism> *>> vWorldMapMatrix, char bugType);
 
 void printWorldMap(vector<vector<WorldBlock<Organism> *>>);
 
@@ -65,18 +65,7 @@ int main() {
         }
     }
 
-    //WorldMap SimWorld(WORLD_SIZE, WORLD_SIZE);
-    
-    // populate world
-//    Organism bug("Bob", vWorldMapMatrix);
-//    bug.getName();
-//    // place Bob
-//    vWorldMapMatrix[0][0]->occupantPtr = &bug;
-//    vWorldMapMatrix[0][0]->bOccupied = true;
-//    bug.setCoords(0, 0);
-//    Coordinates thisBugsSpot = bug.getCoords();
-//    cout << "Getting coords for: " << bug.getName() << "\n";
-//    cout << thisBugsSpot.x << "," << thisBugsSpot.y << "\n";
+
     
     Doodlebug dbug("Dave", vWorldMapMatrix);
     dbug.getName();
@@ -85,15 +74,17 @@ int main() {
     vWorldMapMatrix[2][2]->bOccupied = true;
     dbug.setCoords(2, 2);
     
-    Ant ant("Andy", vWorldMapMatrix);
-    vWorldMapMatrix[2][3]->occupantPtr = &ant;
-    vWorldMapMatrix[2][3]->bOccupied = true;
-    ant.setCoords(2, 3);
+    // make ants with pointers and new
     
     // create ant with ant pointer so can eat and delete maybe
-    Ant * antPtr;
-    antPtr = new Ant();
 
+    Ant * antPtr;
+    antPtr = new Ant("Andy", vWorldMapMatrix);
+    vWorldMapMatrix[2][3]->occupantPtr = antPtr;
+    vWorldMapMatrix[2][3]->bOccupied = true;
+    antPtr->setCoords(2, 3);
+
+    antPtr = new Ant();
     antPtr->setName("Adam");
     antPtr->setSymbol('A');
     antPtr->setBugTypeId(2);
@@ -108,117 +99,25 @@ int main() {
     // simulate time
     // step forward when user presses enter key
     bool stepforth = true;
-    int iterationCount = 1;
+    int it_count = 1;
     do {
-        cout << "CONTROL LOOP ITERATION #"  << iterationCount << endl;
-        
-        // do loop stuff here
-        
-        // move bugs
+        cout << "CONTROL LOOP ITERATION #"  << it_count << endl;
+
         
         cout << "Moving bugs around...\n";
-        // BUG Bob
-        //cout << "Move bug Bob...\n";
+
         
-        // move
-        // bug.move(); // cant move generic organizms any longer
-        // printWorldMap(vWorldMapMatrix); // show me the move!
+        // move doodlebugs first
+        moveBugs(vWorldMapMatrix, 'D');
         
-        cout << "Bug name is: " << dbug.getName() << endl;
-        dbug.move();
-        printWorldMap(vWorldMapMatrix); // show me the move!
-        
-        cout << "Bug name is: " << ant.getName() << endl;
-        ant.move();
         printWorldMap(vWorldMapMatrix); // show me the move!
         
         
-        cout << "Bugs alive by name:" << endl;
-        cout << "Bug alive and name is: " << dbug.getName() << endl;
-        cout << "Bug alive and name is: " << ant.getName() << endl;
-        
-        
-        
-        
-//        // bug chooses the move direction
-//        Coordinates mov_coords = bug.getMoveCoords();
-//        // check map location
-//        // is it on the map?
-//        bool inbounds = checkMapCoordsInBounds(vWorldMapMatrix, WORLD_SIZE_X, WORLD_SIZE_Y, mov_coords);
-//        
-//        // is it an open spot or is it occupied?
-//        bool occupied = checkMapCoordsOccupied(vWorldMapMatrix, WORLD_SIZE_X, WORLD_SIZE_Y, mov_coords);
-//        
-//        // if it is free / open
-//        
-//        if (inbounds && !occupied) {
-//            cout << "In bounds and not occupied. Ready to move bug to loc.\n";
-//            Coordinates old_coords = bug.getCoords(); // get old coords first
-//            moveBug(vWorldMapMatrix, mov_coords, old_coords, &bug);
-//            
-//        } else {
-//            cout << "NOT In bounds OR occupied. NOT Ready to move bug to loc.\n";
-//        }
-//        
-//        // check map test
-//        bug.checkMoveDirection(); // already a pass by reference sittyashin
-//
-//        printWorldMap(vWorldMapMatrix); // show me the move!
-//        
-//        // DBUG DAVE
-//        cout << "Move dbug DAVE...\n";
-//        // bug chooses the move direction
-//        mov_coords = dbug.getMoveCoords();
-//        // check map location
-//        // is it on the map?
-//        inbounds = checkMapCoordsInBounds(vWorldMapMatrix, WORLD_SIZE_X, WORLD_SIZE_Y, mov_coords);
-//        
-//        // is it an open spot or is it occupied?
-//        occupied = checkMapCoordsOccupied(vWorldMapMatrix, WORLD_SIZE_X, WORLD_SIZE_Y, mov_coords);
-//        
-//        // if it is free / open
-//        
-//        if (inbounds && !occupied) {
-//            cout << "In bounds and not occupied. Ready to move bug to loc.\n";
-//            Coordinates old_coords = dbug.getCoords(); // get old coords first
-//            moveBug(vWorldMapMatrix, mov_coords, old_coords, &dbug);
-//            
-//        } else {
-//            cout << "NOT In bounds OR occupied. NOT Ready to move bug to loc.\n";
-//        }
-//        
-//        printWorldMap(vWorldMapMatrix); // show me the move!
-//
-//        // ANT ANDY
-//        cout << "Move ant ANDY...\n";
-//        // bug chooses the move direction
-//        mov_coords = ant.getMoveCoords();
-//        // check map location
-//        // is it on the map?
-//        inbounds = checkMapCoordsInBounds(vWorldMapMatrix, WORLD_SIZE_X, WORLD_SIZE_Y, mov_coords);
-//        
-//        // is it an open spot or is it occupied?
-//        occupied = checkMapCoordsOccupied(vWorldMapMatrix, WORLD_SIZE_X, WORLD_SIZE_Y, mov_coords);
-//        
-//        // if it is free / open
-//        
-//        if (inbounds && !occupied) {
-//            cout << "In bounds and not occupied. Ready to move bug to loc.\n";
-//            Coordinates old_coords = ant.getCoords(); // get old coords first
-//            moveBug(vWorldMapMatrix, mov_coords, old_coords, &ant);
-//            
-//        } else {
-//            cout << "NOT In bounds OR occupied. NOT Ready to move bug to loc.\n";
-//        }
+        moveBugs(vWorldMapMatrix, 'A');
 
         
         printWorldMap(vWorldMapMatrix); // show me the move!
         
-        // if it is occupied
-        // if  bug can eat what's there
-        // eat it
-        // if bug can't eat it
-        // stay put
         
         // user choice
         cout << "OPTIONS: [f]orward [r]ead cell [q]uit" << endl;
@@ -226,7 +125,7 @@ int main() {
         std::cin >> usr_input;
         if (usr_input == 'f') {
             // only count iteration if moving forward in time
-            iterationCount++;
+            it_count++;
             stepConfirmMessage();
         } else if (usr_input == 'r') {
             // read coord details
@@ -251,6 +150,36 @@ void readCoords() {
 void quitSimulation() {
     cout << "Quitting, goodbye!" << endl;
     exit(1);
+}
+
+void moveBugs(vector<vector<WorldBlock<Organism> *>> vWorldMapMatrix, char bugType) {
+    // print the grid with row and column counts
+    cout << "Moving bugs * * * * * * * * *" << endl;
+    for (int row = 1; row < vWorldMapMatrix.size(); row++) {
+        for (int col = 1; col < vWorldMapMatrix[row].size(); col++) {
+            Organism * tmpBugPtr;
+            if (vWorldMapMatrix[row][col]->occupantPtr != nullptr) {
+                tmpBugPtr = vWorldMapMatrix[row][col]->occupantPtr;
+                // get time since moved
+                cout << "Bug named "  << tmpBugPtr->getName() << " ";
+                cout << "Bug type "  << tmpBugPtr->getSymbol() << " ";
+                // if the bug time since moved is more than 0
+                if (tmpBugPtr->getSymbol() == bugType && tmpBugPtr->getTimeSinceMoved() > 0) {
+                    cout << "has not moved in "  << tmpBugPtr->getTimeSinceMoved() << " iterations. ";
+                    // move the bug
+                    cout << "So attempting to move now. \n";
+                    tmpBugPtr->move();
+                    // reset time since moved to 0
+                    tmpBugPtr->resetTimeSinceMoved();
+                } else {
+                    cout << "just moved "  << tmpBugPtr->getTimeSinceMoved() << " iterations ago.\n";
+                    tmpBugPtr->incrementTimeSinceMoved();
+                }
+
+            }
+            
+        }
+    }
 }
 
 void printWorldMap(vector<vector<WorldBlock<Organism> *>> vWorldMapMatrix) {
