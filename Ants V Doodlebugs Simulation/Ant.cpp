@@ -34,7 +34,7 @@ void Ant::die() {
 }
 
 void Ant::move() {
-    cout << "An Ant is moving!\n";
+    // cout << "An Ant is moving!\n";
     // set the move to coordingates
     this->setMoveCoords();
     // check the move to coordinates
@@ -43,12 +43,12 @@ void Ant::move() {
     switch (move_status) {
         case 1:
             // space is valid and empty, move to it
-            cout << "Space is empty, move to it!\n";
+            // cout << "Space is empty, move to it!\n";
             transplantOnMap();
             break;
         case 2:
             // space is valid and occupied, try to eat it
-            cout << "Spot is occupied; ants can't eat other bugs!\n";
+            // cout << "Spot is occupied; ants can't eat other bugs!\n";
             break;
         case 3:
             // TODO: possibly try to breed with it or something

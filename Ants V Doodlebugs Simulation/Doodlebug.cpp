@@ -32,21 +32,21 @@ void Doodlebug::tryToEatBug() {
     // detect bug type in move to spot
     int bug_type_id = getOtherBugTypeId();
     if (bug_type_id == 0) {
-        cout << "Other bug type id is 0: " << bug_type_id << "\n";
+        // cout << "Other bug type id is 0: " << bug_type_id << "\n";
     } else if (bug_type_id == 1) {
-        cout << "Other bug type id is 1: " << bug_type_id << "\n";
+        // cout << "Other bug type id is 1: " << bug_type_id << "\n";
         // another doodlebug, do nothing or maybe breed
     } else if (bug_type_id == 2) {
-        cout << "Other bug type id is 2: " << bug_type_id << "\n";
+        // cout << "Other bug type id is 2: " << bug_type_id << "\n";
         
         // (del)eat the ant
         Coordinates trgt_coords = getMoveCoords();
         
-        cout << "The move target coordinates are: "
-        << trgt_coords.x
-        << ","
-        << trgt_coords.y
-        << endl;
+//        cout << "The move target coordinates are: "
+//        << trgt_coords.x
+//        << ","
+//        << trgt_coords.y
+//        << endl;
         
         vector<vector<WorldBlock<Organism> *>> tmp_map = getMapRef();
         
@@ -76,7 +76,7 @@ void Doodlebug::tryToEatBug() {
 }
 
 void Doodlebug::move() {
-    cout << "A Doodlebug is moving!\n";
+    // cout << "A Doodlebug is moving!\n";
     // set the move to coordingates
     this->setMoveCoords();
     // check the move to coordinates
@@ -85,12 +85,12 @@ void Doodlebug::move() {
     switch (move_status) {
         case 1:
             // space is valid and empty, move to it
-            cout << "Space is empty, move to it!\n";
+            // cout << "Space is empty, move to it!\n";
             this->transplantOnMap();
             break;
         case 2:
             // space is valid and occupied, try to eat it
-            cout << "Spot is occupied, try to eat it!\n";
+            // cout << "Spot is occupied, try to eat it!\n";
             this->tryToEatBug();
             break;
         case 3:

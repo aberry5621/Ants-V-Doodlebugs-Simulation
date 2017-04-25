@@ -111,37 +111,40 @@ void Organism::setCoords(int p_x_coord, int p_y_coord) {
 }
 
 void Organism::setMoveCoords() {
-    cout << "Get move coords called!\n";
+    //cout << "Get move coords called!\n";
     // get current position x, y coords on grid
     int c_x = m_cur_coords.x; // this bugs x pos
     int c_y = m_cur_coords.y; // this bugs y pos
-    cout << "Current loc: " << c_x << "," << c_y << "\n";
+    // cout << "Current loc: " << c_x << "," << c_y << "\n";
     // instead of random, manual direction entry
-    cout << "Manually enter move direction [1] LEFT, [2] UP, [3] RIGHT, [4] DOWN: ";
-    int dir = 0;
-    cin >> dir;
+//    cout << "Manually enter move direction [1] LEFT, [2] UP, [3] RIGHT, [4] DOWN: ";
+//    int dir = 0;
+//    cin >> dir;
+
+    int dir = 1 + rand() % 4;
+    
     switch (dir) {
         case 1:
             // left
-            cout << "Going LEFT! \n";
+            // cout << "Going LEFT! \n";
             m_mov_coords.x = c_x;
             m_mov_coords.y = --c_y;
             break;
         case 2:
             // up
-            cout << "Going UP! \n";
+            // cout << "Going UP! \n";
             m_mov_coords.x = --c_x;
             m_mov_coords.y = c_y;
             break;
         case 3:
             // right
-            cout << "Going RIGHT! \n";
+            // cout << "Going RIGHT! \n";
             m_mov_coords.x = c_x;
             m_mov_coords.y = ++c_y;
             break;
         case 4:
             // down
-            cout << "Going DOWN! \n";
+            // cout << "Going DOWN! \n";
             m_mov_coords.x = ++c_x;
             m_mov_coords.y = c_y;
             break;
@@ -152,7 +155,7 @@ void Organism::setMoveCoords() {
 
 void Organism::transplantOnMap() {
     
-    cout << "Transplant on map called!\n";
+    // cout << "Transplant on map called!\n";
     
     // store current world block in temp pointer?
     
@@ -162,24 +165,19 @@ void Organism::transplantOnMap() {
     tmpOrgPtr = m_map[m_cur_coords.x][m_cur_coords.y]->occupantPtr;
     
     Coordinates tmp_cur_coords = this->getCoords();
-    cout << "This bugs current coordinates: "
-    << tmp_cur_coords.x
-    << ","
-    << tmp_cur_coords.y
-    << endl;
+//    cout << "This bugs current coordinates: "
+//    << tmp_cur_coords.x
+//    << ","
+//    << tmp_cur_coords.y
+//    << endl;
     
     Coordinates tmp_mov_coords = this->getMoveCoords();
-    cout << "This bugs move target coordinates, by getMoveCoords(): "
-    << tmp_mov_coords.x
-    << ","
-    << tmp_mov_coords.y
-    << endl;
-    
-    cout << "This bugs move target coordinates, organism private m_ vars: "
-    << m_mov_coords.x
-    << ","
-    << m_mov_coords.y
-    << endl;
+//    cout << "This bugs move target coordinates, by getMoveCoords(): "
+//    << tmp_mov_coords.x
+//    << ","
+//    << tmp_mov_coords.y
+//    << endl;
+//
     
     // point move to coords pointer to point at the bug that
     // want to move
@@ -192,7 +190,7 @@ void Organism::transplantOnMap() {
 }
 
 void Organism::move() {
-    cout << "A organizm is moving!\n";
+    // cout << "A organizm is moving!\n";
     // set the move to coordingates
     this->setMoveCoords();
     // check the move to coordinates
@@ -201,12 +199,12 @@ void Organism::move() {
     switch (move_status) {
         case 1:
             // space is valid and empty, move to it
-            cout << "Space is empty, move to it!\n";
+            // cout << "Space is empty, move to it!\n";
             this->transplantOnMap();
             break;
         case 2:
             // space is valid and occupied, try to eat it
-            cout << "Spot is occupied, organizms don't know how to eat!\n";
+            // cout << "Spot is occupied, organizms don't know how to eat!\n";
             break;
         case 3:
             // TODO: possibly try to breed with it or something

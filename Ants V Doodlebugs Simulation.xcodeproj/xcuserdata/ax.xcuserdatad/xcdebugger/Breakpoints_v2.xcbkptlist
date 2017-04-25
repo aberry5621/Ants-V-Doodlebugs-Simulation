@@ -9,14 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Ants V Doodlebugs Simulation/main.cpp"
-            timestampString = "514840518.516549"
+            filePath = "Ants V Doodlebugs Simulation/Organism.cpp"
+            timestampString = "514844425.396491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "moveBugs(vector&lt;vector&lt;WorldBlock&lt;Organism&gt; *&gt;&gt; vWorldMapMatrix, char bugType)"
-            landmarkType = "9">
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "Organism::setMoveCoords()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -25,62 +25,30 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Ants V Doodlebugs Simulation/main.cpp"
-            timestampString = "514840518.516549"
+            filePath = "Ants V Doodlebugs Simulation/Doodlebug.cpp"
+            timestampString = "514844797.339639"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "moveBugs(vector&lt;vector&lt;WorldBlock&lt;Organism&gt; *&gt;&gt; vWorldMapMatrix, char bugType)"
-            landmarkType = "9">
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "Doodlebug::move()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Ants V Doodlebugs Simulation/main.cpp"
-            timestampString = "514840518.516549"
+            filePath = "Ants V Doodlebugs Simulation/Ant.cpp"
+            timestampString = "514844799.371997"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
-            landmarkName = "moveBugs(vector&lt;vector&lt;WorldBlock&lt;Organism&gt; *&gt;&gt; vWorldMapMatrix, char bugType)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Ants V Doodlebugs Simulation/main.cpp"
-            timestampString = "514840518.516549"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "moveBugs(vector&lt;vector&lt;WorldBlock&lt;Organism&gt; *&gt;&gt; vWorldMapMatrix, char bugType)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Ants V Doodlebugs Simulation/main.cpp"
-            timestampString = "514840518.516549"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "moveBugs(vector&lt;vector&lt;WorldBlock&lt;Organism&gt; *&gt;&gt; vWorldMapMatrix, char bugType)"
-            landmarkType = "9">
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "Ant::move()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

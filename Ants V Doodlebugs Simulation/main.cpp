@@ -22,7 +22,7 @@ using namespace std;
 void stepConfirmMessage();
 void readCoords();
 void quitSimulation();
-
+int get_rand(int p_lb, int p_ub);
 
 bool checkMapCoordsInBounds(vector<vector<WorldBlock<Organism> *>> map,int world_size_x, int world_size_y, Coordinates loc);
 bool checkMapCoordsOccupied(vector<vector<WorldBlock<Organism> *>> map,int world_size_x, int world_size_y, Coordinates loc);
@@ -42,7 +42,8 @@ int main() {
     // INITIALIZE WORLD CONSTANTS
     const int WORLD_SIZE_X = 20;
     const int WORLD_SIZE_Y = 20;
-    const int QTY_ANTS = 1;
+    const int QTY_ANTS = 50;
+    const int QTY_DBUGS = 5;
     
     // create world
     
@@ -60,64 +61,63 @@ int main() {
     for (int row = 0; row < vWorldMapMatrix.size(); row++) {
         for (int col = 0; col < vWorldMapMatrix[row].size(); col++) {
             vWorldMapMatrix[row][col] = (new WorldBlock<Organism>);
+            vWorldMapMatrix[row][col]->occupantPtr = nullptr;
             vWorldMapMatrix[row][col]->pos_x = row;
             vWorldMapMatrix[row][col]->pos_y = col;
         }
     }
-
-
     
-    Doodlebug dbug("Dave", vWorldMapMatrix);
-    dbug.getName();
+    int antsSpawned = 0;
+    while (antsSpawned < QTY_ANTS) {
+        int r_x = get_rand(0,WORLD_SIZE_X-1);
+        int r_y = get_rand(0,WORLD_SIZE_Y-1);
+        if (vWorldMapMatrix[r_x][r_y]->occupantPtr == nullptr) {
+            Ant * antPtr;
+            string ant_name = "antnon" + to_string(antsSpawned);
+            antPtr = new Ant(ant_name, vWorldMapMatrix);
+            vWorldMapMatrix[r_x][r_y]->occupantPtr = antPtr;
+            vWorldMapMatrix[r_x][r_y]->bOccupied = true;
+            vWorldMapMatrix[r_x][r_y]->occupantPtr->setCoords(r_x, r_y);
+            antsSpawned++;
+            cout << "Populating Ant Number: " << antsSpawned << " ";
+            cout << "at location " << r_x << "," << r_y << endl;
+        }
+    }
     
-    vWorldMapMatrix[2][2]->occupantPtr = &dbug;
-    vWorldMapMatrix[2][2]->bOccupied = true;
-    dbug.setCoords(2, 2);
-    
-    // make ants with pointers and new
-    
-    // create ant with ant pointer so can eat and delete maybe
-
-    Ant * antPtr;
-    antPtr = new Ant("Andy", vWorldMapMatrix);
-    vWorldMapMatrix[2][3]->occupantPtr = antPtr;
-    vWorldMapMatrix[2][3]->bOccupied = true;
-    antPtr->setCoords(2, 3);
-
-    antPtr = new Ant();
-    antPtr->setName("Adam");
-    antPtr->setSymbol('A');
-    antPtr->setBugTypeId(2);
-    antPtr->setMapPointer(vWorldMapMatrix);
-    vWorldMapMatrix[3][3]->occupantPtr = antPtr;
-    vWorldMapMatrix[3][3]->bOccupied = true;
-    antPtr->setCoords(3, 3);
-
-    printWorldMap(vWorldMapMatrix);
+    int dbugsSpawned = 0;
+    while (dbugsSpawned < QTY_DBUGS) {
+        int r_x = get_rand(0,WORLD_SIZE_X-1);
+        int r_y = get_rand(0,WORLD_SIZE_Y-1);
+        if (vWorldMapMatrix[r_x][r_y]->occupantPtr == nullptr) {
+            Doodlebug * dbugPtr;
+            string dbug_name = "antnon" + to_string(dbugsSpawned);
+            dbugPtr = new Doodlebug(dbug_name, vWorldMapMatrix);
+            vWorldMapMatrix[r_x][r_y]->occupantPtr = dbugPtr;
+            vWorldMapMatrix[r_x][r_y]->bOccupied = true;
+            vWorldMapMatrix[r_x][r_y]->occupantPtr->setCoords(r_x, r_y);
+            dbugsSpawned++;
+            cout << "Populating Doodlebug Number: " << dbugsSpawned << " ";
+            cout << "at location " << r_x << "," << r_y << endl;
+        }
+    }
 
     // control loop
     // simulate time
     // step forward when user presses enter key
     bool stepforth = true;
-    int it_count = 1;
+    int it_count = 0;
     do {
         cout << "CONTROL LOOP ITERATION #"  << it_count << endl;
-
         
         cout << "Moving bugs around...\n";
 
-        
-        // move doodlebugs first
-        moveBugs(vWorldMapMatrix, 'D');
-        
+        if (it_count > 0) {
+            // move doodlebugs first
+            moveBugs(vWorldMapMatrix, 'D');
+            
+            moveBugs(vWorldMapMatrix, 'A');
+        }
         printWorldMap(vWorldMapMatrix); // show me the move!
-        
-        
-        moveBugs(vWorldMapMatrix, 'A');
-
-        
-        printWorldMap(vWorldMapMatrix); // show me the move!
-        
         
         // user choice
         cout << "OPTIONS: [f]orward [r]ead cell [q]uit" << endl;
@@ -152,32 +152,34 @@ void quitSimulation() {
     exit(1);
 }
 
+int get_rand(int lb, int ub) {
+    return lb + rand() % (ub - lb + 1);
+}
+
 void moveBugs(vector<vector<WorldBlock<Organism> *>> vWorldMapMatrix, char bugType) {
     // print the grid with row and column counts
     cout << "Moving bugs * * * * * * * * *" << endl;
-    for (int row = 1; row < vWorldMapMatrix.size(); row++) {
-        for (int col = 1; col < vWorldMapMatrix[row].size(); col++) {
+    for (int row = 0; row < vWorldMapMatrix.size(); row++) {
+        for (int col = 0; col < vWorldMapMatrix[row].size(); col++) {
             Organism * tmpBugPtr;
             if (vWorldMapMatrix[row][col]->occupantPtr != nullptr) {
                 tmpBugPtr = vWorldMapMatrix[row][col]->occupantPtr;
                 // get time since moved
-                cout << "Bug named "  << tmpBugPtr->getName() << " ";
-                cout << "Bug type "  << tmpBugPtr->getSymbol() << " ";
+                // cout << "Bug named "  << tmpBugPtr->getName() << " ";
+                // cout << "Bug type "  << tmpBugPtr->getSymbol() << " ";
                 // if the bug time since moved is more than 0
                 if (tmpBugPtr->getSymbol() == bugType && tmpBugPtr->getTimeSinceMoved() > 0) {
-                    cout << "has not moved in "  << tmpBugPtr->getTimeSinceMoved() << " iterations. ";
+                    // cout << "has not moved in "  << tmpBugPtr->getTimeSinceMoved() << " iterations. ";
                     // move the bug
-                    cout << "So attempting to move now. \n";
+                    // cout << "So attempting to move now. \n";
                     tmpBugPtr->move();
                     // reset time since moved to 0
                     tmpBugPtr->resetTimeSinceMoved();
                 } else {
-                    cout << "just moved "  << tmpBugPtr->getTimeSinceMoved() << " iterations ago.\n";
+                    // cout << "just moved "  << tmpBugPtr->getTimeSinceMoved() << " iterations ago.\n";
                     tmpBugPtr->incrementTimeSinceMoved();
                 }
-
             }
-            
         }
     }
 }
