@@ -24,6 +24,14 @@ void readCoords();
 void quitSimulation();
 int get_rand(int p_lb, int p_ub);
 
+// for counting creatures
+struct CreatureCount {
+    int num_ants = 0;
+    int num_dbugs = 0;
+};
+
+void countBugs(vector<vector<WorldBlock<Organism> *>> vWorldMapMatrix);
+
 bool checkMapCoordsInBounds(vector<vector<WorldBlock<Organism> *>> map,int world_size_x, int world_size_y, Coordinates loc);
 bool checkMapCoordsOccupied(vector<vector<WorldBlock<Organism> *>> map,int world_size_x, int world_size_y, Coordinates loc);
 
@@ -109,14 +117,13 @@ int main() {
     do {
         cout << "CONTROL LOOP ITERATION #"  << it_count << endl;
         
-        cout << "Moving bugs around...\n";
-
         if (it_count > 0) {
             // move doodlebugs first
             moveBugs(vWorldMapMatrix, 'D');
-            
+            // then move ants
             moveBugs(vWorldMapMatrix, 'A');
         }
+        countBugs(vWorldMapMatrix);
         printWorldMap(vWorldMapMatrix); // show me the move!
         
         // user choice
@@ -182,6 +189,25 @@ void moveBugs(vector<vector<WorldBlock<Organism> *>> vWorldMapMatrix, char bugTy
             }
         }
     }
+}
+
+void countBugs(vector<vector<WorldBlock<Organism> *>> vWorldMapMatrix) {
+    CreatureCount current_count;
+    for (int row = 0; row < vWorldMapMatrix.size(); row++) {
+        for (int col = 0; col < vWorldMapMatrix[row].size(); col++) {
+            if (! (vWorldMapMatrix[row][col]->occupantPtr == nullptr) && vWorldMapMatrix[row][col]->bOccupied) {
+                char creature_symbol = vWorldMapMatrix[row][col]->occupantPtr->getSymbol();
+                if (creature_symbol == 'A') {
+                    current_count.num_ants++;
+                } else if (creature_symbol == 'D') {
+                    current_count.num_dbugs++;
+                }
+            }
+        }
+    }
+    
+    cout << "Ants:" << current_count.num_ants << "\n";
+    cout << "Doodlebugs:" << current_count.num_dbugs << "\n";
 }
 
 void printWorldMap(vector<vector<WorldBlock<Organism> *>> vWorldMapMatrix) {
