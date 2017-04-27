@@ -111,10 +111,6 @@ int main() {
     do {
         cout << "CONTROL LOOP ITERATION #"  << it_count << endl;
         
-        cout << "PRE MOVE / EAT / BREED / DIE MAP --------" << endl;
-        countBugs(vWorldMapMatrix);
-        printWorldMap(vWorldMapMatrix); // show me the move!
-        
         if (it_count > 0) {
             // move doodlebugs first
             moveBugs(vWorldMapMatrix, 'D');

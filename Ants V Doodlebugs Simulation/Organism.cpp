@@ -83,26 +83,19 @@ int Organism::checkMoveCoords() {
 int Organism::checkSpawnCoords(Coordinates p_trgt_coords) {
     // move status code
     int spawn_status_code = 0;
-    // 0: no state recorded
-    // 1: empty space,
-    // 2: not empty, occupied by something
-    // 3: off the map
-    // 4: profit
+    // 0: no state recorded, block full or off the map
+    // 1: empty space, move to-able
     bool inbounds = false;
     bool occupied = false;
     // check if move to coords are in bounds
     if ((p_trgt_coords.x >= 0 && p_trgt_coords.x < m_map.size()) && (p_trgt_coords.y >= 0 && p_trgt_coords.y < m_map[0].size())) {
         inbounds = true;
-    } else {
-        spawn_status_code = 3;
     }
     // empty or occupied
     if (inbounds) {
         occupied = m_map[p_trgt_coords.x][p_trgt_coords.y]->bOccupied;
         if (!occupied) {
             spawn_status_code = 1;
-        } else {
-            spawn_status_code = 2;
         }
     }
     return spawn_status_code;
@@ -256,13 +249,13 @@ void Organism::breed() {
                 // left
                 // cout << "Check LEFT! \n";
                 tmp_trgt_coords.x = c_x;
-                tmp_trgt_coords.y = --c_y;
+                tmp_trgt_coords.y = c_y-1;
                 open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
                 break;
             case 1:
                 // up
                 // cout << "Going UP! \n";
-                tmp_trgt_coords.x = --c_x;
+                tmp_trgt_coords.x = c_x-1;
                 tmp_trgt_coords.y = c_y;
                 open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
                 break;
@@ -270,13 +263,13 @@ void Organism::breed() {
                 // right
                 // cout << "Going RIGHT! \n";
                 tmp_trgt_coords.x = c_x;
-                tmp_trgt_coords.y = ++c_y;
+                tmp_trgt_coords.y = c_y+1;
                 open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
                 break;
             case 3:
                 // down
                 // cout << "Going DOWN! \n";
-                tmp_trgt_coords.x = ++c_x;
+                tmp_trgt_coords.x = c_x+1;
                 tmp_trgt_coords.y = c_y;
                 open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
                 break;
