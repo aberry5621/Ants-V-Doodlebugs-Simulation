@@ -50,18 +50,12 @@ int main() {
     // INITIALIZE WORLD CONSTANTS
     const int WORLD_SIZE_X = 20;
     const int WORLD_SIZE_Y = 20;
-    const int QTY_ANTS = 50;
+    const int QTY_ANTS = 100;
     const int QTY_DBUGS = 5;
     
     // create world
-    
     vector<vector<WorldBlock<Organism> *>> vWorldMapMatrix;
-    WorldBlock<Organism> * tmpWorldBlockPtr;
-    
-    // store x y WorldMap size in WorldMap size member variables
-    
     vWorldMapMatrix.resize(WORLD_SIZE_X);
-    
     for (int i = 0; i < WORLD_SIZE_X; i++) {
         vWorldMapMatrix[i] = vector<WorldBlock<Organism> *>(WORLD_SIZE_Y);
     }
@@ -117,12 +111,18 @@ int main() {
     do {
         cout << "CONTROL LOOP ITERATION #"  << it_count << endl;
         
+        cout << "PRE MOVE / EAT / BREED / DIE MAP --------" << endl;
+        countBugs(vWorldMapMatrix);
+        printWorldMap(vWorldMapMatrix); // show me the move!
+        
         if (it_count > 0) {
             // move doodlebugs first
             moveBugs(vWorldMapMatrix, 'D');
             // then move ants
             moveBugs(vWorldMapMatrix, 'A');
         }
+        
+        cout << "POST MOVE / EAT / BREED / DIE MAP --------" << endl;
         countBugs(vWorldMapMatrix);
         printWorldMap(vWorldMapMatrix); // show me the move!
         

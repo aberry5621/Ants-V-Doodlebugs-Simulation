@@ -80,6 +80,34 @@ int Organism::checkMoveCoords() {
     return move_status_code;
 }
 
+int Organism::checkSpawnCoords(Coordinates p_trgt_coords) {
+    // move status code
+    int spawn_status_code = 0;
+    // 0: no state recorded
+    // 1: empty space,
+    // 2: not empty, occupied by something
+    // 3: off the map
+    // 4: profit
+    bool inbounds = false;
+    bool occupied = false;
+    // check if move to coords are in bounds
+    if ((p_trgt_coords.x >= 0 && p_trgt_coords.x < m_map.size()) && (p_trgt_coords.y >= 0 && p_trgt_coords.y < m_map[0].size())) {
+        inbounds = true;
+    } else {
+        spawn_status_code = 3;
+    }
+    // empty or occupied
+    if (inbounds) {
+        occupied = m_map[p_trgt_coords.x][p_trgt_coords.y]->bOccupied;
+        if (!occupied) {
+            spawn_status_code = 1;
+        } else {
+            spawn_status_code = 2;
+        }
+    }
+    return spawn_status_code;
+}
+
 int Organism::getTimeSinceMoved() {
     return this->m_time_since_moved;
 }
@@ -193,7 +221,6 @@ void Organism::move() {
         default:
             break;
     }
-    
     // nested increment age after moving / eating happens
     this->incrementAge();
 
@@ -209,6 +236,58 @@ void Organism::resetTimeSinceMoved() {
 
 void Organism::incrementAge() {
     this->m_age++;
+}
+
+void Organism::breed() {
+    cout << "Organism breed called!\n";
+    // TO BREED
+    
+    // DETECT SURROUNDING EMPTY BLOCKS
+    // get current coordinates
+    int c_x = m_cur_coords.x; // this bugs x pos
+    int c_y = m_cur_coords.y; // this bugs y pos
+    // provide storage for target coordinates
+    Coordinates tmp_trgt_coords;
+    // open blocks array L, U, R, D
+    int open_blocks[] = {0, 0, 0, 0};
+    for (int i = 0; i < 4; i++) {
+        switch (i) {
+            case 0:
+                // left
+                // cout << "Check LEFT! \n";
+                tmp_trgt_coords.x = c_x;
+                tmp_trgt_coords.y = --c_y;
+                open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
+                break;
+            case 1:
+                // up
+                // cout << "Going UP! \n";
+                tmp_trgt_coords.x = --c_x;
+                tmp_trgt_coords.y = c_y;
+                open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
+                break;
+            case 2:
+                // right
+                // cout << "Going RIGHT! \n";
+                tmp_trgt_coords.x = c_x;
+                tmp_trgt_coords.y = ++c_y;
+                open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
+                break;
+            case 3:
+                // down
+                // cout << "Going DOWN! \n";
+                tmp_trgt_coords.x = ++c_x;
+                tmp_trgt_coords.y = c_y;
+                open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
+                break;
+            default:
+                break;
+        }
+    }
+    
+    // if surrounding block empty, breed
+        // new organism at breed x y
+    
 }
 
 void Organism::die() {

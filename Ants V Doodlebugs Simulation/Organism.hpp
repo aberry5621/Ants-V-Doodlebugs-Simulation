@@ -39,6 +39,7 @@ public:
     Coordinates getCoords();
     Coordinates getMoveCoords();
     int checkMoveCoords();
+    int checkSpawnCoords(Coordinates p_trgt_coords);
     int getTimeSinceMoved();
     int getOtherBugTypeId();
     vector<vector<WorldBlock<Organism> *>> getMapRef();
@@ -58,6 +59,7 @@ public:
     void incrementAge();
     
     // mutators
+    void breed();
     void die();
     
 private:
