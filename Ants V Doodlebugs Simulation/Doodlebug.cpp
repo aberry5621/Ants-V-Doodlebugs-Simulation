@@ -37,16 +37,9 @@ void Doodlebug::tryToEatBug() {
         // cout << "Other bug type id is 1: " << bug_type_id << "\n";
         // another doodlebug, do nothing or maybe breed
     } else if (bug_type_id == 2) {
-        // cout << "Other bug type id is 2: " << bug_type_id << "\n";
-        
+
         // (del)eat the ant
         Coordinates trgt_coords = getMoveCoords();
-        
-//        cout << "The move target coordinates are: "
-//        << trgt_coords.x
-//        << ","
-//        << trgt_coords.y
-//        << endl;
         
         vector<vector<WorldBlock<Organism> *>> tmp_map = getMapRef();
         
@@ -58,7 +51,6 @@ void Doodlebug::tryToEatBug() {
         tmpOrgPtr->die();
         tmpOrgPtr = nullptr;
         
-        
         tmp_map[trgt_coords.x][trgt_coords.y]->occupantPtr = nullptr;
         tmp_map[trgt_coords.x][trgt_coords.y]->bOccupied = false;
         
@@ -67,10 +59,9 @@ void Doodlebug::tryToEatBug() {
         // move to the newly empty spot
         this->transplantOnMap();
         
-        
     } else {
         // bug type ID error
-        cout << "Some kind of bug type id errror!\n";
+        cout << "ERR: bug type id errror!\n";
         exit(1);
     }
 }
@@ -100,4 +91,30 @@ void Doodlebug::move() {
             break;
     }
     
+    // hunger increment and check
+    m_hunger++;
+    cout << "This bug hunger level is: " << m_hunger << endl;
+    
+    if (m_hunger > 3) {
+        // die
+        // get this coordinates
+        Coordinates this_coords = getCoords();
+        vector<vector<WorldBlock<Organism> *>> tmp_map = getMapRef();
+        // save this bug in a temp pointer
+        // Point at itself so we can clear location
+        Organism * tmpOrgPtr;
+        tmpOrgPtr = tmp_map[this_coords.x][this_coords.y]->occupantPtr;
+        // clear locaiton
+        tmp_map[this_coords.x][this_coords.y]->occupantPtr = nullptr;
+        tmp_map[this_coords.x][this_coords.y]->bOccupied = false;
+        // delete this thing
+        tmpOrgPtr->die();
+        tmpOrgPtr = nullptr;
+        
+    }
+    
 }
+
+
+
+

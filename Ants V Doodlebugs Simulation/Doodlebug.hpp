@@ -27,6 +27,7 @@ public:
 private:
     int m_bug_type_id;
     int m_ants_eaten;
+    int m_hunger = 0;
 };
 
 #endif /* Doodlebug_hpp */

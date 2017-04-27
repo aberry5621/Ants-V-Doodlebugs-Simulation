@@ -115,14 +115,7 @@ void Organism::setMoveCoords() {
     // get current position x, y coords on grid
     int c_x = m_cur_coords.x; // this bugs x pos
     int c_y = m_cur_coords.y; // this bugs y pos
-    // cout << "Current loc: " << c_x << "," << c_y << "\n";
-    // instead of random, manual direction entry
-//    cout << "Manually enter move direction [1] LEFT, [2] UP, [3] RIGHT, [4] DOWN: ";
-//    int dir = 0;
-//    cin >> dir;
-
     int dir = 1 + rand() % 4;
-    
     switch (dir) {
         case 1:
             // left
@@ -156,28 +149,12 @@ void Organism::setMoveCoords() {
 void Organism::transplantOnMap() {
     
     // cout << "Transplant on map called!\n";
-    
-    // store current world block in temp pointer?
-    
-    // point temp ptr at current world block occupant
+
     // this is the bug that wants to move
     Organism * tmpOrgPtr;
     tmpOrgPtr = m_map[m_cur_coords.x][m_cur_coords.y]->occupantPtr;
     
     Coordinates tmp_cur_coords = this->getCoords();
-//    cout << "This bugs current coordinates: "
-//    << tmp_cur_coords.x
-//    << ","
-//    << tmp_cur_coords.y
-//    << endl;
-    
-    Coordinates tmp_mov_coords = this->getMoveCoords();
-//    cout << "This bugs move target coordinates, by getMoveCoords(): "
-//    << tmp_mov_coords.x
-//    << ","
-//    << tmp_mov_coords.y
-//    << endl;
-//
     
     // point move to coords pointer to point at the bug that
     // want to move
@@ -213,6 +190,9 @@ void Organism::move() {
             break;
     }
     
+    // nested increment age after moving / eating happens
+    this->incrementAge();
+
 }
 
 void Organism::incrementTimeSinceMoved() {
@@ -221,6 +201,10 @@ void Organism::incrementTimeSinceMoved() {
 
 void Organism::resetTimeSinceMoved() {
     this->m_time_since_moved = 0;
+}
+
+void Organism::incrementAge() {
+    this->m_age++;
 }
 
 void Organism::die() {

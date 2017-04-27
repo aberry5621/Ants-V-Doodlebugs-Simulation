@@ -172,8 +172,6 @@ void moveBugs(vector<vector<WorldBlock<Organism> *>> vWorldMapMatrix, char bugTy
             if (vWorldMapMatrix[row][col]->occupantPtr != nullptr) {
                 tmpBugPtr = vWorldMapMatrix[row][col]->occupantPtr;
                 // get time since moved
-                // cout << "Bug named "  << tmpBugPtr->getName() << " ";
-                // cout << "Bug type "  << tmpBugPtr->getSymbol() << " ";
                 // if the bug time since moved is more than 0
                 if (tmpBugPtr->getSymbol() == bugType && tmpBugPtr->getTimeSinceMoved() > 0) {
                     // cout << "has not moved in "  << tmpBugPtr->getTimeSinceMoved() << " iterations. ";

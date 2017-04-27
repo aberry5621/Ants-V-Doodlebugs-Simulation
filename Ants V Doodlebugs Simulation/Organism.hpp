@@ -54,6 +54,7 @@ public:
     virtual void move();
     void incrementTimeSinceMoved();
     void resetTimeSinceMoved();
+    void incrementAge();
     
     // mutators
     void die();
