@@ -50,7 +50,7 @@ int main() {
     // INITIALIZE WORLD CONSTANTS
     const int WORLD_SIZE_X = 20;
     const int WORLD_SIZE_Y = 20;
-    const int QTY_ANTS = 10;
+    const int QTY_ANTS = 100;
     const int QTY_DBUGS = 5;
     
     // create world

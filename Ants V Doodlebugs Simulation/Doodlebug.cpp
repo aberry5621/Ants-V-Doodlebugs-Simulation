@@ -8,8 +8,8 @@
 
 #include "Doodlebug.hpp"
 #include <iostream>
-using std::cout;
-using std::endl;
+#include <string>
+using namespace std;
 
 Doodlebug::Doodlebug() {/* blank constructor */}
 
@@ -94,7 +94,7 @@ void Doodlebug::move() {
     
     // hunger increment and check
     m_hunger++;
-    cout << "This bug hunger level is: " << m_hunger << endl;
+    //cout << "This bug hunger level is: " << m_hunger << endl;
     
     if (m_hunger > 3) {
         // die
@@ -119,10 +119,32 @@ void Doodlebug::move() {
     if (cur_age % 8 == 0) {
         // lived for 8 time cycles, breed
         // cout << "Doodlebug is " << cur_age << " time cycles old\n";
-        this->breed();
+        Coordinates spawnLoc = this->getSpawnCoordinates();
+        if (spawnLoc.x == -999) {
+            // do not spawn, no space
+            cout << "NULL SPAWN LOCATION (BLOCKED IN)\n";
+        } else {
+            // yes spawn
+            Doodlebug * dbugPtr;
+            string dbug_name = "dbugSpawn" + to_string(getIterationCount()) + to_string(spawnLoc.x) + to_string(spawnLoc.y);
+            vector<vector<WorldBlock<Organism> *>> map = getMapRef();
+            dbugPtr = new Doodlebug(dbug_name, map);
+            map[spawnLoc.x][spawnLoc.y]->occupantPtr = dbugPtr;
+            map[spawnLoc.x][spawnLoc.y]->bOccupied = true;
+            map[spawnLoc.x][spawnLoc.y]->occupantPtr->setCoords(spawnLoc.x, spawnLoc.y);
+            cout << "Spawning Doodlebug at location " << spawnLoc.x << "," << spawnLoc.y << endl;
+        }
     }
     
 }
+
+
+
+
+
+
+
+
 
 
 

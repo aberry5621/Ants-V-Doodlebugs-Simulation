@@ -40,7 +40,9 @@ public:
     Coordinates getMoveCoords();
     int checkMoveCoords();
     int checkSpawnCoords(Coordinates p_trgt_coords);
+    Coordinates getSpawnCoordinates();
     int getTimeSinceMoved();
+    int getIterationCount();
     int getOtherBugTypeId();
     vector<vector<WorldBlock<Organism> *>> getMapRef();
     
@@ -59,7 +61,6 @@ public:
     void incrementAge();
     
     // mutators
-    void breed();
     void die();
     
 private:
@@ -68,6 +69,7 @@ private:
     int m_age = 0;
     char m_symbol = 'O';
     int m_time_since_moved;
+    int m_iteration_count = 1;
     Coordinates m_cur_coords;
     Coordinates m_mov_coords;
     vector<vector<WorldBlock<Organism> *>> m_map;

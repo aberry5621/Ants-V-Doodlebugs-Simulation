@@ -101,8 +101,131 @@ int Organism::checkSpawnCoords(Coordinates p_trgt_coords) {
     return spawn_status_code;
 }
 
+Coordinates Organism::getSpawnCoordinates() {
+    //cout << "Get Spawn Coordinates!\n";
+    // FIND EMPTY SPAWN COORDS TO BREED INTO
+    // DETECT SURROUNDING EMPTY BLOCKS
+    // get current coordinates
+    int c_x = m_cur_coords.x; // this bugs x pos
+    int c_y = m_cur_coords.y; // this bugs y pos
+    // provide storage for target coordinates
+    Coordinates tmp_trgt_coords;
+    Coordinates tmp_spawn_coords;
+    tmp_trgt_coords.x = -999;
+    tmp_trgt_coords.y = -999;
+    // open blocks array L, U, R, D
+    int open_blocks[] = {0, 0, 0, 0};
+    for (int i = 0; i < 4; i++) {
+        switch (i) {
+            case 0:
+                // left
+                // cout << "Check LEFT! \n";
+                tmp_trgt_coords.x = c_x;
+                tmp_trgt_coords.y = c_y-1;
+                open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
+                break;
+            case 1:
+                // up
+                // cout << "Going UP! \n";
+                tmp_trgt_coords.x = c_x-1;
+                tmp_trgt_coords.y = c_y;
+                open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
+                break;
+            case 2:
+                // right
+                // cout << "Going RIGHT! \n";
+                tmp_trgt_coords.x = c_x;
+                tmp_trgt_coords.y = c_y+1;
+                open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
+                break;
+            case 3:
+                // down
+                // cout << "Going DOWN! \n";
+                tmp_trgt_coords.x = c_x+1;
+                tmp_trgt_coords.y = c_y;
+                open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
+                break;
+            default:
+                break;
+        }
+    }
+    bool at_least_one_open_spot = false;
+    int idx = 0;
+    while (idx < 4) {
+        //cout << "while loop mon "<< idx <<  " \n";
+        if (open_blocks[idx] > 0) {
+            at_least_one_open_spot = true;
+        }
+        idx++;
+    }
+    cout << "escaped the while loop \n";
+    // try catch to make sure there is an open spot to breed
+    try {
+        if (at_least_one_open_spot) {
+            
+            // CHOOSE RANDOM EMPTY NEARBY BLOCK TO SPAWN
+            // random selection of open blocks in array
+            bool random_spawn_loc_found = false;
+            int rand_spawn_loc_idx = NULL;
+            while (!random_spawn_loc_found) {
+                rand_spawn_loc_idx = 0 + rand() % 4;
+                if (open_blocks[rand_spawn_loc_idx] == 1) {
+                    random_spawn_loc_found = true;
+                }
+            }
+            // translate open block direction to spawn coords
+            // L U R D == 0 1 2 3
+            switch (rand_spawn_loc_idx) {
+                case 0:
+                    // left
+                    // cout << "Spawn LEFT! \n";
+                    tmp_spawn_coords.x = c_x;
+                    tmp_spawn_coords.y = c_y-1;
+                    break;
+                case 1:
+                    // up
+                    // cout << "Spawn UP! \n";
+                    tmp_spawn_coords.x = c_x-1;
+                    tmp_spawn_coords.y = c_y;
+                    break;
+                case 2:
+                    // right
+                    // cout << "Spawn RIGHT! \n";
+                    tmp_spawn_coords.x = c_x;
+                    tmp_spawn_coords.y = c_y+1;
+                    break;
+                case 3:
+                    // down
+                    // cout << "Spawn DOWN! \n";
+                    tmp_spawn_coords.x = c_x+1;
+                    tmp_spawn_coords.y = c_y;
+                    break;
+                default:
+                    break;
+            }
+
+        } else {
+            throw 0;
+
+        }
+    } catch (int e) {
+        cout << e << " - NOT Okay to breed I guess\n";
+        // set temp spawn coords to -999 to indicate no
+        // spawn locaiton available - this is a weak check.
+        tmp_spawn_coords.x = -999;
+        tmp_spawn_coords.y = -999;
+        return tmp_spawn_coords;
+
+    }
+    return tmp_spawn_coords;
+}
+
 int Organism::getTimeSinceMoved() {
     return this->m_time_since_moved;
+}
+
+int Organism::getIterationCount() {
+    return this->m_iteration_count;
 }
 
 int Organism::getOtherBugTypeId() {
@@ -216,6 +339,7 @@ void Organism::move() {
     }
     // nested increment age after moving / eating happens
     this->incrementAge();
+    this-m_iteration_count++;
 
 }
 
@@ -229,58 +353,6 @@ void Organism::resetTimeSinceMoved() {
 
 void Organism::incrementAge() {
     this->m_age++;
-}
-
-void Organism::breed() {
-    cout << "Organism breed called!\n";
-    // TO BREED
-    
-    // DETECT SURROUNDING EMPTY BLOCKS
-    // get current coordinates
-    int c_x = m_cur_coords.x; // this bugs x pos
-    int c_y = m_cur_coords.y; // this bugs y pos
-    // provide storage for target coordinates
-    Coordinates tmp_trgt_coords;
-    // open blocks array L, U, R, D
-    int open_blocks[] = {0, 0, 0, 0};
-    for (int i = 0; i < 4; i++) {
-        switch (i) {
-            case 0:
-                // left
-                // cout << "Check LEFT! \n";
-                tmp_trgt_coords.x = c_x;
-                tmp_trgt_coords.y = c_y-1;
-                open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
-                break;
-            case 1:
-                // up
-                // cout << "Going UP! \n";
-                tmp_trgt_coords.x = c_x-1;
-                tmp_trgt_coords.y = c_y;
-                open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
-                break;
-            case 2:
-                // right
-                // cout << "Going RIGHT! \n";
-                tmp_trgt_coords.x = c_x;
-                tmp_trgt_coords.y = c_y+1;
-                open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
-                break;
-            case 3:
-                // down
-                // cout << "Going DOWN! \n";
-                tmp_trgt_coords.x = c_x+1;
-                tmp_trgt_coords.y = c_y;
-                open_blocks[i] = checkSpawnCoords(tmp_trgt_coords);
-                break;
-            default:
-                break;
-        }
-    }
-    
-    // if surrounding block empty, breed
-        // new organism at breed x y
-    
 }
 
 void Organism::die() {

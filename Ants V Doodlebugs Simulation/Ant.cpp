@@ -8,8 +8,8 @@
 
 #include "Ant.hpp"
 #include <iostream>
-using std::cout;
-using std::endl;
+#include <string>
+using namespace std;
 
 Ant::Ant()  {/* blank constructor */}
 
@@ -62,8 +62,30 @@ void Ant::move() {
     if (cur_age % 3 == 0) {
         // lived for 3 time cycles, breed
         // cout << "Ant is " << cur_age << " time cycles old\n";
-        this->breed();
+        Coordinates spawnLoc = this->getSpawnCoordinates();
+        if (spawnLoc.x == -999) {
+            // do not spawn, no space
+            cout << "NULL SPAWN LOCATION (BLOCKED IN)\n";
+        } else {
+            Ant * antPtr;
+            string ant_name = "antSpawn" + to_string(getIterationCount()) + to_string(spawnLoc.x) + to_string(spawnLoc.y);
+            vector<vector<WorldBlock<Organism> *>> map = getMapRef();
+            antPtr = new Ant(ant_name, map);
+            map[spawnLoc.x][spawnLoc.y]->occupantPtr = antPtr;
+            map[spawnLoc.x][spawnLoc.y]->bOccupied = true;
+            map[spawnLoc.x][spawnLoc.y]->occupantPtr->setCoords(spawnLoc.x, spawnLoc.y);
+            cout << "Spawning Ant at location " << spawnLoc.x << "," << spawnLoc.y << endl;
+        }
     }
     
 }
+
+
+
+
+
+
+
+
+
 
