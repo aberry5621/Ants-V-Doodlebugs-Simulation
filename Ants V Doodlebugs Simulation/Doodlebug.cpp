@@ -54,6 +54,7 @@ void Doodlebug::tryToEatBug() {
         tmp_map[trgt_coords.x][trgt_coords.y]->occupantPtr = nullptr;
         tmp_map[trgt_coords.x][trgt_coords.y]->bOccupied = false;
         
+        m_hunger = 0;
         m_ants_eaten++;
         
         // move to the newly empty spot
