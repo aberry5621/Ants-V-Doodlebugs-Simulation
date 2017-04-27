@@ -65,7 +65,7 @@ void Ant::move() {
         Coordinates spawnLoc = this->getSpawnCoordinates();
         if (spawnLoc.x == -999) {
             // do not spawn, no space
-            cout << "NULL SPAWN LOCATION (BLOCKED IN)\n";
+            // cout << "NULL SPAWN LOCATION (BLOCKED IN)\n";
         } else {
             Ant * antPtr;
             string ant_name = "antSpawn" + to_string(getIterationCount()) + to_string(spawnLoc.x) + to_string(spawnLoc.y);
@@ -74,7 +74,7 @@ void Ant::move() {
             map[spawnLoc.x][spawnLoc.y]->occupantPtr = antPtr;
             map[spawnLoc.x][spawnLoc.y]->bOccupied = true;
             map[spawnLoc.x][spawnLoc.y]->occupantPtr->setCoords(spawnLoc.x, spawnLoc.y);
-            cout << "Spawning Ant at location " << spawnLoc.x << "," << spawnLoc.y << endl;
+            // cout << "Spawning Ant at location " << spawnLoc.x << "," << spawnLoc.y << endl;
         }
     }
     

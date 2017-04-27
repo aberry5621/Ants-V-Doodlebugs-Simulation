@@ -14,7 +14,7 @@ using std::cin;
 
 // CONSTRUCTORS
 Organism::Organism() {
-    cout << "Constructing an organiszm.\n";
+    // cout << "Constructing an organiszm.\n";
     // start bugs with a count of 1
     this->incrementTimeSinceMoved();
 }
@@ -158,7 +158,7 @@ Coordinates Organism::getSpawnCoordinates() {
         }
         idx++;
     }
-    cout << "escaped the while loop \n";
+    // cout << "escaped the while loop \n";
     // try catch to make sure there is an open spot to breed
     try {
         if (at_least_one_open_spot) {
@@ -209,7 +209,7 @@ Coordinates Organism::getSpawnCoordinates() {
 
         }
     } catch (int e) {
-        cout << e << " - NOT Okay to breed I guess\n";
+        // cout << e << " - NOT Okay to breed I guess\n";
         // set temp spawn coords to -999 to indicate no
         // spawn locaiton available - this is a weak check.
         tmp_spawn_coords.x = -999;
@@ -356,7 +356,7 @@ void Organism::incrementAge() {
 }
 
 void Organism::die() {
-    cout << "Organism die called!\n";
+    // cout << "Organism die called!\n";
 }
 
 

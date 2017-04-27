@@ -118,12 +118,12 @@ int main() {
             moveBugs(vWorldMapMatrix, 'A');
         }
         
-        cout << "POST MOVE / EAT / BREED / DIE MAP --------" << endl;
+        // cout << "POST MOVE / EAT / BREED / DIE MAP --------" << endl;
         countBugs(vWorldMapMatrix);
         printWorldMap(vWorldMapMatrix); // show me the move!
         
         // user choice
-        cout << "OPTIONS: [f]orward [r]ead cell [q]uit" << endl;
+        cout << "OPTIONS: [f]orward or [q]uit" << endl;
         char usr_input = ' ';
         std::cin >> usr_input;
         if (usr_input == 'f') {
@@ -161,7 +161,7 @@ int get_rand(int lb, int ub) {
 
 void moveBugs(vector<vector<WorldBlock<Organism> *>> vWorldMapMatrix, char bugType) {
     // print the grid with row and column counts
-    cout << "Moving bugs * * * * * * * * *" << endl;
+    // cout << "Moving bugs * * * * * * * * *" << endl;
     for (int row = 0; row < vWorldMapMatrix.size(); row++) {
         for (int col = 0; col < vWorldMapMatrix[row].size(); col++) {
             Organism * tmpBugPtr;

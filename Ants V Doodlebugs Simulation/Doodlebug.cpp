@@ -122,7 +122,7 @@ void Doodlebug::move() {
         Coordinates spawnLoc = this->getSpawnCoordinates();
         if (spawnLoc.x == -999) {
             // do not spawn, no space
-            cout << "NULL SPAWN LOCATION (BLOCKED IN)\n";
+            // cout << "NULL SPAWN LOCATION (BLOCKED IN)\n";
         } else {
             // yes spawn
             Doodlebug * dbugPtr;
@@ -132,7 +132,7 @@ void Doodlebug::move() {
             map[spawnLoc.x][spawnLoc.y]->occupantPtr = dbugPtr;
             map[spawnLoc.x][spawnLoc.y]->bOccupied = true;
             map[spawnLoc.x][spawnLoc.y]->occupantPtr->setCoords(spawnLoc.x, spawnLoc.y);
-            cout << "Spawning Doodlebug at location " << spawnLoc.x << "," << spawnLoc.y << endl;
+            // cout << "Spawning Doodlebug at location " << spawnLoc.x << "," << spawnLoc.y << endl;
         }
     }
     
