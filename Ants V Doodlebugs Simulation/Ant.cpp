@@ -56,6 +56,13 @@ void Ant::move() {
         default:
             break;
     }
+    this->incrementAge();
+    // breed
+    int cur_age = this->getAge();
+    if (cur_age % 3 == 0) {
+        // lived for 3 time cycles, breed
+        cout << "Ant is " << cur_age << " time cycles old\n";
+    }
     
 }
 

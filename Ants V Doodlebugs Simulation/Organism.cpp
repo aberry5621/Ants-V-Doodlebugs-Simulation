@@ -39,6 +39,10 @@ string Organism::getName() {
     return m_name;
 }
 
+int Organism::getAge() {
+    return m_age;
+}
+
 char Organism::getSymbol() {
     return this->m_symbol;
 }
@@ -167,7 +171,7 @@ void Organism::transplantOnMap() {
 }
 
 void Organism::move() {
-    // cout << "A organizm is moving!\n";
+    cout << "A organizm is moving!\n";
     // set the move to coordingates
     this->setMoveCoords();
     // check the move to coordinates

@@ -113,6 +113,13 @@ void Doodlebug::move() {
         tmpOrgPtr = nullptr;
         
     }
+    this->incrementAge();
+    // breed
+    int cur_age = this->getAge();
+    if (cur_age % 8 == 0) {
+        // lived for 8 time cycles, breed
+        cout << "Doodlebug is " << cur_age << " time cycles old\n";
+    }
     
 }
 

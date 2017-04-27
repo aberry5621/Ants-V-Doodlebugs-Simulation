@@ -34,6 +34,7 @@ public:
     // getters
     int getBugTypeId();
     string getName();
+    int getAge();
     char getSymbol();
     Coordinates getCoords();
     Coordinates getMoveCoords();
