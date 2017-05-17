@@ -6,6 +6,13 @@
 //  Copyright © 2017 COMP235. All rights reserved.
 //
 
+//File: fuelAndMileage.cpp
+//Name: Mia Chia
+//Date: 1/26/2017
+//Compiler: MS Visual C++ 2015
+//Files: fuelAndMileage.h
+//Class Implemented: Odometer
+
 #include "Organism.hpp"
 #include <iostream>
 using std::cout;
