@@ -1,14 +1,16 @@
-//  File: main.cpp
-//  Ants V Doodlebugs Simulation
-//  Created by Alex on 4/19/17.
-//  Copyright © 2017 COMP235. All rights reserved.
-//  Compiler: Apple LLVM 8.1
-//  Files:
-//  WorldBlockTemplate.hpp,
-//  Organism.hpp, Organism.cpp
-//  Ant.hpp, Ant.cpp
-//  Doodlebug.hpp, Doodlebug.cpp
-//  Demonstrate library implementations of classes Organism, Ant and Doodlebug
+/* Ants V Doodlebugs Simulation
+ *
+ File: main.cpp
+ Created by Alex on 4/19/17.
+ Compiler: Apple LLVM 8.1
+ Files:
+ WorldBlockTemplate.hpp,
+ Organism.hpp, Organism.cpp
+ Ant.hpp, Ant.cpp
+ Doodlebug.hpp, Doodlebug.cpp
+ Purpose: Demonstrate library implementations of classes Organism, Ant and Doodlebug
+ *
+ */
 
 #include "WorldBlockTemplate.hpp"
 #include "Organism.hpp"

@@ -1,10 +1,27 @@
-//
-//  Ant.hpp
-//  Ants V Doodlebugs Simulation
-//
-//  Created by ax on 4/20/17.
-//  Copyright © 2017 COMP235. All rights reserved.
-//
+/* Ants V Doodlebugs Simulation
+ *
+ File: Ant.hpp
+ Created by Alex on 4/20/17.
+ Compiler: Apple LLVM 8.1
+ Files: Ant.cpp
+ 
+ Class Declaration: Ant, inherits Organism
+ 
+ ACCESSORS
+ ---------
+ 
+ MUTATORS
+ --------
+ void move();
+ Precondition: none
+ Postcondition: Ant is repositioned on world map, assigned new position coordinates, and incremented in age
+ 
+ void die();
+ Precondition: none
+ Postcondition: Ant object is deleted from memory
+ 
+ *
+ */
 
 #ifndef Ant_hpp
 #define Ant_hpp
@@ -18,13 +35,8 @@ public:
         Ant(char p_symbol, int p_bug_type_id);
         Ant(string p_name, vector<vector<WorldBlock<Organism> *>> p_map);
         ~Ant();
-
-        // just move
         virtual void move();
-    
-        // die
         void die();
-    
 private:
     int m_bug_type_id;
 };

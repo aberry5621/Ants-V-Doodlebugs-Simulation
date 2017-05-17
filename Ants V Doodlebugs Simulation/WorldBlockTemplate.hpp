@@ -1,5 +1,4 @@
-//
-//  WorldBlockTemplate.hpp
+//  File: WorldBlockTemplate.hpp
 //  Ants V Doodlebugs Simulation
 //
 //  Created by ax on 4/23/17.

@@ -1,10 +1,12 @@
-//
-//  Ant.cpp
-//  Ants V Doodlebugs Simulation
-//
-//  Created by ax on 4/20/17.
-//  Copyright © 2017 COMP235. All rights reserved.
-//
+/* Ants V Doodlebugs Simulation
+ *
+ File: Ant.cpp
+ Created by Alex on 4/20/17.
+ Compiler: Apple LLVM 8.1
+ Files: Ant.hpp
+ Class Implemented: Ant
+ *
+ */
 
 #include "Ant.hpp"
 #include <iostream>
@@ -13,12 +15,12 @@ using namespace std;
 
 Ant::Ant()  {/* blank constructor */}
 
-// preload constrcutor
+// Preload constrcutor
 Ant::Ant(char p_symbol, int p_bug_type_id) {
     setSymbol(p_symbol);
     setBugTypeId(p_bug_type_id);
 }
-// initializes with preload constructor to set symbol
+// Initializes with preload constructor to set symbol
 Ant::Ant(string p_name, vector<vector<WorldBlock<Organism> *>> p_map) : Ant('A',2) {
     this->setName(p_name);
     this->setMapPointer(p_map);
@@ -34,16 +36,11 @@ void Ant::die() {
 }
 
 void Ant::move() {
-    // cout << "An Ant is moving!\n";
-    // set the move to coordingates
     this->setMoveCoords();
-    // check the move to coordinates
     int move_status = checkMoveCoords();
-    
     switch (move_status) {
         case 1:
             // space is valid and empty, move to it
-            // cout << "Space is empty, move to it!\n";
             transplantOnMap();
             break;
         case 2:
@@ -57,15 +54,13 @@ void Ant::move() {
             break;
     }
     this->incrementAge();
-    // breed
+    // Breeding
     int cur_age = this->getAge();
     if (cur_age % 3 == 0) {
         // lived for 3 time cycles, breed
-        // cout << "Ant is " << cur_age << " time cycles old\n";
         Coordinates spawnLoc = this->getSpawnCoordinates();
         if (spawnLoc.x == -999) {
             // do not spawn, no space
-            // cout << "NULL SPAWN LOCATION (BLOCKED IN)\n";
         } else {
             Ant * antPtr;
             string ant_name = "antSpawn" + to_string(getIterationCount()) + to_string(spawnLoc.x) + to_string(spawnLoc.y);
@@ -74,7 +69,6 @@ void Ant::move() {
             map[spawnLoc.x][spawnLoc.y]->occupantPtr = antPtr;
             map[spawnLoc.x][spawnLoc.y]->bOccupied = true;
             map[spawnLoc.x][spawnLoc.y]->occupantPtr->setCoords(spawnLoc.x, spawnLoc.y);
-            // cout << "Spawning Ant at location " << spawnLoc.x << "," << spawnLoc.y << endl;
         }
     }
     
