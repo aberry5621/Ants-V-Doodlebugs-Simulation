@@ -21,5 +21,4 @@ struct WorldBlock {
     T * occupantPtr;
 };
 
-
 #endif /* WorldBlockTemplate_hpp */
