@@ -5,7 +5,7 @@
  Compiler: Apple LLVM 8.1
  Files: Ant.cpp
  
- Class Declaration: Ant, inherits Organism
+ Class Declaration: Ant
  
  ACCESSORS
  ---------
@@ -13,11 +13,11 @@
  MUTATORS
  --------
  void move();
- Precondition: none
+ Precondition:
  Postcondition: Ant is repositioned on world map, assigned new position coordinates, and incremented in age
  
  void die();
- Precondition: none
+ Precondition: 
  Postcondition: Ant object is deleted from memory
  
  *

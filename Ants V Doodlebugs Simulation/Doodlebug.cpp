@@ -1,10 +1,12 @@
-//
-//  Doodlebug.cpp
-//  Ants V Doodlebugs Simulation
-//
-//  Created by ax on 4/20/17.
-//  Copyright © 2017 COMP235. All rights reserved.
-//
+/* Ants V Doodlebugs Simulation
+ *
+ File: Doodlebug.cpp
+ Created by Alex on 4/20/17.
+ Compiler: Apple LLVM 8.1
+ Files: Doodlebug.hpp
+ Class Implemented: Doodlebug
+ *
+ */
 
 #include "Doodlebug.hpp"
 #include <iostream>
@@ -32,57 +34,46 @@ void Doodlebug::tryToEatBug() {
     // detect bug type in move to spot
     int bug_type_id = getOtherBugTypeId();
     if (bug_type_id == 0) {
-        // cout << "Other bug type id is 0: " << bug_type_id << "\n";
+        // Other bug type id is 0
     } else if (bug_type_id == 1) {
-        // cout << "Other bug type id is 1: " << bug_type_id << "\n";
         // another doodlebug, do nothing or maybe breed
     } else if (bug_type_id == 2) {
-
         // (del)eat the ant
         Coordinates trgt_coords = getMoveCoords();
-        
         vector<vector<WorldBlock<Organism> *>> tmp_map = getMapRef();
-        
         // Point at victim ant
         Organism * tmpOrgPtr;
         tmpOrgPtr = tmp_map[trgt_coords.x][trgt_coords.y]->occupantPtr;
-        
         // eat it / kill it
         tmpOrgPtr->die();
         tmpOrgPtr = nullptr;
-        
         tmp_map[trgt_coords.x][trgt_coords.y]->occupantPtr = nullptr;
         tmp_map[trgt_coords.x][trgt_coords.y]->bOccupied = false;
-        
+        // reset hunger stats
         m_hunger = 0;
         m_ants_eaten++;
-        
         // move to the newly empty spot
         this->transplantOnMap();
         
     } else {
-        // bug type ID error
+        // bug type ID error TODO: make exception handler
         cout << "ERR: bug type id errror!\n";
         exit(1);
     }
 }
 
 void Doodlebug::move() {
-    // cout << "A Doodlebug is moving!\n";
     // set the move to coordingates
     this->setMoveCoords();
     // check the move to coordinates
     int move_status = checkMoveCoords();
-    
     switch (move_status) {
         case 1:
             // space is valid and empty, move to it
-            // cout << "Space is empty, move to it!\n";
             this->transplantOnMap();
             break;
         case 2:
             // space is valid and occupied, try to eat it
-            // cout << "Spot is occupied, try to eat it!\n";
             this->tryToEatBug();
             break;
         case 3:
@@ -92,9 +83,8 @@ void Doodlebug::move() {
             break;
     }
     
-    // hunger increment and check
+    // didn't eat, increase hunger
     m_hunger++;
-    //cout << "This bug hunger level is: " << m_hunger << endl;
     
     if (m_hunger > 3) {
         // die
@@ -118,11 +108,9 @@ void Doodlebug::move() {
     int cur_age = this->getAge();
     if (cur_age % 8 == 0) {
         // lived for 8 time cycles, breed
-        // cout << "Doodlebug is " << cur_age << " time cycles old\n";
         Coordinates spawnLoc = this->getSpawnCoordinates();
         if (spawnLoc.x == -999) {
             // do not spawn, no space
-            // cout << "NULL SPAWN LOCATION (BLOCKED IN)\n";
         } else {
             // yes spawn
             Doodlebug * dbugPtr;
