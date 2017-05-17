@@ -1,17 +1,12 @@
-//
-//  Organism.cpp
-//  Ants V Doodlebugs Simulation
-//
-//  Created by ax on 4/19/17.
-//  Copyright © 2017 COMP235. All rights reserved.
-//
-
-//File: fuelAndMileage.cpp
-//Name: Mia Chia
-//Date: 1/26/2017
-//Compiler: MS Visual C++ 2015
-//Files: fuelAndMileage.h
-//Class Implemented: Odometer
+/* Ants V Doodlebugs Simulation
+ *
+ File: Organism.cpp
+ Created by Alex on 4/19/17.
+ Compiler: Apple LLVM 8.1
+ Files: Organism.hpp
+ Class Implemented: Organism
+ *
+ */
 
 #include "Organism.hpp"
 #include <iostream>
@@ -37,7 +32,6 @@ Organism::~Organism() {
 }
 
 // GETTERS
-
 int Organism::getBugTypeId() {
     return m_bug_type_id;
 }
@@ -109,7 +103,6 @@ int Organism::checkSpawnCoords(Coordinates p_trgt_coords) {
 }
 
 Coordinates Organism::getSpawnCoordinates() {
-    //cout << "Get Spawn Coordinates!\n";
     // FIND EMPTY SPAWN COORDS TO BREED INTO
     // DETECT SURROUNDING EMPTY BLOCKS
     // get current coordinates
@@ -266,7 +259,6 @@ void Organism::setCoords(int p_x_coord, int p_y_coord) {
 }
 
 void Organism::setMoveCoords() {
-    //cout << "Get move coords called!\n";
     // get current position x, y coords on grid
     int c_x = m_cur_coords.x; // this bugs x pos
     int c_y = m_cur_coords.y; // this bugs y pos
@@ -274,25 +266,21 @@ void Organism::setMoveCoords() {
     switch (dir) {
         case 1:
             // left
-            // cout << "Going LEFT! \n";
             m_mov_coords.x = c_x;
             m_mov_coords.y = --c_y;
             break;
         case 2:
             // up
-            // cout << "Going UP! \n";
             m_mov_coords.x = --c_x;
             m_mov_coords.y = c_y;
             break;
         case 3:
             // right
-            // cout << "Going RIGHT! \n";
             m_mov_coords.x = c_x;
             m_mov_coords.y = ++c_y;
             break;
         case 4:
             // down
-            // cout << "Going DOWN! \n";
             m_mov_coords.x = ++c_x;
             m_mov_coords.y = c_y;
             break;
@@ -302,9 +290,6 @@ void Organism::setMoveCoords() {
 }
 
 void Organism::transplantOnMap() {
-    
-    // cout << "Transplant on map called!\n";
-
     // this is the bug that wants to move
     Organism * tmpOrgPtr;
     tmpOrgPtr = m_map[m_cur_coords.x][m_cur_coords.y]->occupantPtr;
@@ -331,12 +316,10 @@ void Organism::move() {
     switch (move_status) {
         case 1:
             // space is valid and empty, move to it
-            // cout << "Space is empty, move to it!\n";
             this->transplantOnMap();
             break;
         case 2:
             // space is valid and occupied, try to eat it
-            // cout << "Spot is occupied, organizms don't know how to eat!\n";
             break;
         case 3:
             // TODO: possibly try to breed with it or something
